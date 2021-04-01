@@ -1,68 +1,82 @@
-# Pré-requis
+\_Deuxième évaluation en cours de formation de Nassim Fernane : Projet Anime Ranking du 5 avril 2021.
 
-Pour pouvoir lancer le site, vous aurez besoin de:
+## **FONCTIONNEMENT ET DESCRIPTION DU SITE**
 
--   PHP cli >= 7.3
--   un serveur MySQL
--   [composer](https://getcomposer.org/download/)
--   toutes les [extensions PHP](https://laravel.com/docs/8.x/deployment#server-requirements) nécessaires au bon fonctionnement de Laravel
+### Page 1
 
-# Installation
+### Page 2
 
-## Installation des dépendances
+## **ORGANISATION DU CODE**
 
-Pour installer les dépendances du projet, vous devrez utiliser composer :
+**Lien de la maquette Figma** : https://www.figma.com/file/CciOnwXV0xB0fck6iezUpu/My-Music-App?node-id=0%3A1
 
-```
-composer install
-```
+## **JOURNAL DE BORD**
 
-## Création de la base de données
+### Jour 1
 
-Pour faire tourner le projet, vous devrez créer une nouvelle base de données sur
-votre serveur MySQL (avec PhpMyAdmin ou bien en ligne de commande).
+1. _Analyse des documents et demandes clients_
 
-## Configuration de la base de données
+-   Définition de ce qui est indispensable et des aspects sur lequels on peut proposer des modifications
+-   Réflexion et définition des fonctionnalités du site et de son interface
+-   Préparation des ressources : choix des articles, images et biographies
+-   Elaboration des codes couleurs et choix des polices de caractères
 
-Une fois les dépendances installées, vous devrez copier le fichier
-`.env.example` en `/env`
+2. _Elaboration de la structure générale du site et outils_
 
-```
-cp .env.example .env
-```
+-   Création des fichiers HTML et principales sections de développement
+-   Mise en place de SASS et fichiers de style modulaires
+-   Installation des dépendances
 
-Vous devrez ensuite modifier les informations de connexion à la base de données
-contenues dans ce fichier, en fonction du nom que vous aurez donné à votre base
-de donnée, et de votre environnement (port, username, mot de passe)
+3. _Maquettage du site première partie_
 
-```
-DB_PORT=???
-DB_DATABASE=???
-DB_USERNAME=???
-DB_PASSWORD=???
-```
+-   Choix et retouches du logo, déclinaison des couleurs
+-   Début du maquettage, page 1 et versions tablette/mobile
+-   Modernisation du design
 
-### Migrations
+### Jour 2
 
-Une fois vos informations de connexion renseignées, vous devrez créer toutes les
-tables du projet. Pour faciliter cette tâche, Laravel utilise un système de
-[migrations](https://laravel.com/docs/8.x/migrations) qui automatisent ce
-processus.
+1.  _Maquettage du site deuxième partie_
 
-Pour lancer les migration, exécutez la commande suivante :
+-   Fin de la page 2 et déclinaisons responsive
 
-```
-php artisan migrate
-```
+2.  _Début du code_
 
-## Génération de la clé de chiffrement
+-   Stockage des couleurs en variables CSS
+-   Séparation des différentes sections en layouts
+-   Approfondissement de la structure du site, mise en place des contenus
 
-Vous pouvez maintenant lancer le serveur de développement en ligne de commande
+3.  _Mise en forme_
 
-```
-php artisan serve
-```
+-   Conception visuelle des principales sections de la page d'accueil
 
-Lorsque vos accéderez au site, Vous verrez une erreur Laravel, avec un bouton
-qui vous suggère de créer une clé. Appuyez sur ce bouton, puis relancer votre
-serveur de développement.
+4.  _Script_
+
+-   Implémentation de la partie JavaScript pour la section de recherche d'un nouvel artiste, avec preview sonore des trois derniers titres
+
+### Jour 3
+
+1.  _Mise en forme, seconde partie_
+
+-   Conception visuelle de la page des artistes favoris
+-   Mises à jour mineures sur le design de la première page
+
+2.  _Script_
+
+-   Ecriture d'un fichier JSON pour stocker les informations des artistes mis en favoris
+-   Elaboration d'un script pour changer l'encadré des favoris dynamiquement
+-   Elaboration d'un script pour revenir à la page d'accueil
+
+## Jour 4
+
+1.  _Mise en forme, troisième partie_
+
+-   Finalisation du responsive
+-   Correctifs mineurs
+
+2.  _Code_
+
+-   Vérification de la structure et commentaires
+
+3.  _Organisation_
+
+-   Mise à jour du Readme

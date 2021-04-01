@@ -43,7 +43,7 @@ Route::post('/login', function (Request $request) {
     return redirect()->intended('/');
   }
   return back()->withErrors([
-    'username' => 'The provided credentials do not match our records.',
+    'username' => 'Vos identifiants sont incorrects',
   ]);
 });
 
