@@ -12,7 +12,11 @@
     </header>
     <p>{{ $anime->description }}</p>
     <div>
+        @error('reviewconnexion')
+            <p>Vous devez être connecté pour ajouter une critique</p>
+        @enderror
       <div class="actions">
+        
         <div>
           <a class="cta" href="/anime/{{ $anime->id }}/new_review">Écrire une critique</a>
         </div>

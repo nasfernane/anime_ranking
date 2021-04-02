@@ -13,19 +13,24 @@
     <p>{{ $anime->description }}</p>
     <div>
       <div class="actions">
-        <form action="/anime/{id}/new_review" method="POST">
-        @csrf
-        <div class="input-group">
-          <label for="content">Votre critique</label>
-          <input id="content" name="content" required />
-          @error('username')
-            <p class="error">{{ $message }}</p>
-          @enderror
-        </div>
+        @if  (!isset($userReview))
+            <form action="/anime/{{ $anime->id }}/new_review" method="POST">
+            @csrf
+            <div class="input-group">
+            <label for="content">Votre critique</label>
+            <input id="content" name="content" required />
+            @error('username')
+                <p class="error">{{ $message }}</p>
+            @enderror
+            </div>
 
-        <button class="cta">Ajouter</button>
+            <button class="cta">Ajouter</button>
 
-        </form>
+            </form>
+        @else 
+            <p>Votre critique :</p>
+            <p>{{$userReview->content}}</p>
+        @endisset
       </div>
     </div>
   </article>

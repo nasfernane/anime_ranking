@@ -30,5 +30,6 @@ Route::get('/anime/{id}', [AnimeController::class, 'getSpecificAnime']);
 
 // routes liées aux reviews
 Route::get('/anime/{id}/new_review', [ReviewController::class, 'newReview']);
+Route::post('/anime/{id}/new_review', [ReviewController::class, 'addReview']);
 
 
