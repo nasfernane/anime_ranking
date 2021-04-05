@@ -17,8 +17,8 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->text('content');
             $table->timestamps();
-            $table->foreignId('anime_id');
-            $table->foreignId('user_id');
+            $table->foreignId('anime_id')->constrained();
+            $table->foreignId('user_id')->constrained();
         });
     }
 

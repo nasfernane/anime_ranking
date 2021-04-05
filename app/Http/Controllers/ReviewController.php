@@ -15,25 +15,23 @@ class ReviewController extends Controller
         if (Auth::check()) {
             $userId = Auth::id();
 
-            $review = DB::select("SELECT * FROM reviews WHERE user_id = ? && anime_id = ?", [$userId, $animeId])[0];
+            $review = DB::select("SELECT * FROM reviews WHERE user_id = ? && anime_id = ?", [$userId, $animeId]);
             // récupère l'anime concerné
             $anime = DB::select("SELECT * FROM animes WHERE id = ?", [$animeId])[0];
             
-            if (!$review) {
+            if (!isset($review[0])) {
                 // affiche la page
                 return view('new_review', ["anime" => $anime]);
             } else {
-                return view('new_review', ["anime" => $anime, "userReview" => $review]);
+                return view('new_review', ["anime" => $anime, "userReview" => $review[0]]);
             }
             
         }
 
         return back()->withErrors([
-            'needconnexion' => 'Vous devez vous connecter pour ajouter une critique',
+            'reviewconnexion' => 'Vous devez vous connecter pour ajouter une critique',
           ]);
 
-
-        
     }
 
     public function addReview (Request $request, $animeId) {
