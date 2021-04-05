@@ -196,3 +196,36 @@ input {
 .login {
   display: grid;
   place-items: center; }
+
+.anime .actions form .input__group--range {
+  width: 600px; }
+  .anime .actions form .input__group--range input {
+    padding: 0;
+    border: 0;
+    width: 100%;
+    -webkit-appearance: none; }
+    .anime .actions form .input__group--range input::-webkit-slider-runnable-track {
+      background: #ccc; }
+    .anime .actions form .input__group--range input::-moz-range-thumb {
+      background: #ccc; }
+    .anime .actions form .input__group--range input::-ms-track {
+      background: transparent; }
+    .anime .actions form .input__group--range input::-ms-fill-lower {
+      background: #e1e1e1;
+      border-radius: 10px; }
+    .anime .actions form .input__group--range input::-ms-fill-upper {
+      background: #eee; }
+    .anime .actions form .input__group--range input:focus {
+      outline: none; }
+  .anime .actions form .input__group--range .range__list {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    margin-top: 16px;
+    width: 100%;
+    padding: 0.3rem; }
+    .anime .actions form .input__group--range .range__list option {
+      display: block;
+      width: 0;
+      height: auto;
+      text-indent: 0; }
