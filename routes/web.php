@@ -33,3 +33,6 @@ Route::get('/anime/{id}/new_review', [ReviewController::class, 'newReview']);
 Route::post('/anime/{id}/new_review', [ReviewController::class, 'addReview']);
 
 
+
+
+

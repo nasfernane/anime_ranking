@@ -1,6 +1,6 @@
 <x-layout>
   <x-slot name="title">
-    Nouvelle critique de {{$anime->title}}
+    Nouvelle critique de {{ $anime->title }}
   </x-slot>
 
   <article class="anime">
