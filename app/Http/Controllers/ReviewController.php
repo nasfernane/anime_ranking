@@ -35,17 +35,17 @@ class ReviewController extends Controller
     }
 
     public function addReview (Request $request, $animeId) {
-        dd(Auth::user()->username);
         $validated = $request->validate([
             "content" => "required|string",
             "note" => "required|integer",
           ]);
         
-        DB::insert('INSERT INTO reviews (content, anime_id, user_id, note)
-                    VALUES (:content, :anime_id, :user_id, :note)', ['content' => $validated['content'],
+        DB::insert('INSERT INTO reviews (content, anime_id, user_id, note, user_name)
+                    VALUES (:content, :anime_id, :user_id, :note, :user_name)', ['content' => $validated['content'],
                      'anime_id' => $animeId, 
                      'user_id' => Auth::id(),
-                     'note' => $validated['note']
+                     'note' => $validated['note'],
+                     'user_name' => Auth::user()->username
                     ]);
 
         return back();

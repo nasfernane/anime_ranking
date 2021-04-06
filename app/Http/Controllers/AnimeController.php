@@ -19,7 +19,7 @@ class AnimeController extends Controller
     public function getSpecificAnime ($id) {
         // récupère l'anime selon l'id entré en paramètre dans l'url, avec les reviews qui lui sont associées
         $reviews = DB::select('
-            SELECT animes.title, animes.description, animes.cover, animes.id, reviews.content, reviews.note, reviews.user_id
+            SELECT animes.*, reviews.*
             FROM animes
             LEFT JOIN reviews
             ON reviews.anime_id = animes.id
@@ -48,7 +48,7 @@ class AnimeController extends Controller
                 return view('anime', ["reviews" => $reviews, "anime" => $anime]);
             }
             // si l'anime ne dispose pas de review, on renvoie seulement les informations sur l'anime
-            return view('anime', ["reviews" => $reviews, "anime" => $anime]);
+            return view('anime', ["anime" => $anime]);
         }
         // si l'id ne correspond à aucun anime, on renvoie vers la page d'accueuil
         return redirect ('/');

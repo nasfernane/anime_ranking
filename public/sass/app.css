@@ -71,39 +71,38 @@ h2 {
 .flow > * + * {
   margin-top: 1rem; }
 
-header.topnav {
-  border-bottom: 1px solid #ccc; }
-
-header.topnav .inner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 110ch;
-  margin: 0 auto; }
-
-.logo {
-  text-decoration: none;
-  color: inherit;
-  font-family: "Poppins", sans-serif; }
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center; }
-
-nav > * {
-  margin: 1rem; }
-
-nav a {
-  color: inherit;
-  text-decoration: none; }
-
-nav button {
-  background: none;
-  border: none;
-  color: black;
-  cursor: pointer; }
+.anime .actions form .input__group--range {
+  width: 600px; }
+  .anime .actions form .input__group--range input {
+    padding: 0;
+    border: 0;
+    width: 100%;
+    -webkit-appearance: none; }
+    .anime .actions form .input__group--range input::-webkit-slider-runnable-track {
+      background: #ccc; }
+    .anime .actions form .input__group--range input::-moz-range-thumb {
+      background: #ccc; }
+    .anime .actions form .input__group--range input::-ms-track {
+      background: transparent; }
+    .anime .actions form .input__group--range input::-ms-fill-lower {
+      background: #e1e1e1;
+      border-radius: 10px; }
+    .anime .actions form .input__group--range input::-ms-fill-upper {
+      background: #eee; }
+    .anime .actions form .input__group--range input:focus {
+      outline: none; }
+  .anime .actions form .input__group--range .range__list {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    margin-top: 16px;
+    width: 100%;
+    padding: 0.3rem; }
+    .anime .actions form .input__group--range .range__list option {
+      display: block;
+      width: 0;
+      height: auto;
+      text-indent: 0; }
 
 main {
   max-width: 80ch;
@@ -197,35 +196,36 @@ input {
   display: grid;
   place-items: center; }
 
-.anime .actions form .input__group--range {
-  width: 600px; }
-  .anime .actions form .input__group--range input {
-    padding: 0;
-    border: 0;
-    width: 100%;
-    -webkit-appearance: none; }
-    .anime .actions form .input__group--range input::-webkit-slider-runnable-track {
-      background: #ccc; }
-    .anime .actions form .input__group--range input::-moz-range-thumb {
-      background: #ccc; }
-    .anime .actions form .input__group--range input::-ms-track {
-      background: transparent; }
-    .anime .actions form .input__group--range input::-ms-fill-lower {
-      background: #e1e1e1;
-      border-radius: 10px; }
-    .anime .actions form .input__group--range input::-ms-fill-upper {
-      background: #eee; }
-    .anime .actions form .input__group--range input:focus {
-      outline: none; }
-  .anime .actions form .input__group--range .range__list {
-    display: flex;
-    justify-content: space-between;
-    height: auto;
-    margin-top: 16px;
-    width: 100%;
-    padding: 0.3rem; }
-    .anime .actions form .input__group--range .range__list option {
-      display: block;
-      width: 0;
-      height: auto;
-      text-indent: 0; }
+header.topnav {
+  border-bottom: 1px solid #ccc; }
+
+header.topnav .inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 110ch;
+  margin: 0 auto; }
+
+.logo {
+  text-decoration: none;
+  color: inherit;
+  font-family: "Poppins", sans-serif; }
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center; }
+
+nav > * {
+  margin: 1rem; }
+
+nav a {
+  color: inherit;
+  text-decoration: none; }
+
+nav button {
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer; }

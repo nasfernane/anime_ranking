@@ -1,0 +1,40 @@
+header.topnav {
+    border-bottom: 1px solid #ccc;
+}
+
+header.topnav .inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 110ch;
+    margin: 0 auto;
+}
+
+.logo {
+    text-decoration: none;
+    color: inherit;
+    font-family: "Poppins", sans-serif;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+nav > * {
+    margin: 1rem;
+}
+
+nav a {
+    color: inherit;
+    text-decoration: none;
+}
+
+nav button {
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+}

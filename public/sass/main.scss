@@ -5,6 +5,10 @@
 
 @import "components/rangeinput";
 
+@import "layout/base";
+@import "layout/header";
+
+@import "pages/welcome";
 @import "pages/animes";
 @import "pages/watchlist";
 @import "pages/ranking";

@@ -1,0 +1,17 @@
+/**************
+  * APP STYLES
+  **************/
+
+:root {
+    font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+}
+
+.flow > * + * {
+    margin-top: 1rem;
+}

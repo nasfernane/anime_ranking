@@ -20,6 +20,7 @@ class CreateReviewsTable extends Migration
             $table->foreignId('anime_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->integer('note')->constrained();
+            $table->string('user_name');
         });
     }
 
