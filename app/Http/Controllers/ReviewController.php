@@ -35,6 +35,7 @@ class ReviewController extends Controller
     }
 
     public function addReview (Request $request, $animeId) {
+        dd(Auth::user()->username);
         $validated = $request->validate([
             "content" => "required|string",
             "note" => "required|integer",
