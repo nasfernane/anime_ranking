@@ -19,6 +19,7 @@ class CreateAnimesTable extends Migration
             $table->text('description');
             $table->string('cover');
             $table->timestamps();
+            $table->float('avgRank', 2, 1)->nullable();
         });
     }
 

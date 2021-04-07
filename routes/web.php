@@ -26,6 +26,7 @@ Route::post('signout', [AuthController::class, 'signOut']);
 
 // routes liées aux animes
 Route::get('/', [AnimeController::class, 'getAllAnimes']);
+Route::get('/top', [AnimeController::class, 'displayTopAnimes']);
 Route::get('/anime/{id}', [AnimeController::class, 'getSpecificAnime']);
 
 // routes liées aux reviews

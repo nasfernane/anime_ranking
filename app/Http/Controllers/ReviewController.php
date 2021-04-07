@@ -29,7 +29,7 @@ class ReviewController extends Controller
         }
 
         return back()->withErrors([
-            'reviewconnexion' => 'Vous devez vous connecter pour ajouter une critique',
+            'reviewconnexion' => 'Vous devez vous connecter pour ajouter une review',
           ]);
 
     }
@@ -41,12 +41,23 @@ class ReviewController extends Controller
           ]);
         
         DB::insert('INSERT INTO reviews (content, anime_id, user_id, note, user_name)
-                    VALUES (:content, :anime_id, :user_id, :note, :user_name)', ['content' => $validated['content'],
-                     'anime_id' => $animeId, 
-                     'user_id' => Auth::id(),
-                     'note' => $validated['note'],
-                     'user_name' => Auth::user()->username
-                    ]);
+            VALUES (:content, :anime_id, :user_id, :note, :user_name)', ['content' => $validated['content'],
+                'anime_id' => $animeId, 
+                'user_id' => Auth::id(),
+                'note' => $validated['note'],
+                'user_name' => Auth::user()->username
+            ]);
+
+        // calcul de la note moyenne, arrondie sur la première décimale
+        $avg_rank = round(collect(DB::select('
+            SELECT reviews.note 
+            FROM reviews
+            WHERE reviews.anime_id = ?', [$animeId]
+        ))->avg('note'), 1);
+
+        DB::update("UPDATE animes
+                    SET avgRank = $avg_rank
+                    WHERE id = $animeId");
 
         return back();
     }

@@ -10,6 +10,7 @@
             </div>
             <div class="anime__header--title">
                 <h1>{{ $anime['title'] }}</h1>
+                <p>Note moyenne des utilisateurs: <strong><span>{{ $anime['avgRank'] }}</span>/10</strong></p>
             </div>
             
         </header>
@@ -25,11 +26,11 @@
             <div class="actions">
                 @if (isset($userReview))
                     <div>
-                        <a class="cta" href="/anime/{{ $userReview->id }}/edit_review">Modifier votre critique</a>
+                        <a class="cta" href="/anime/{{ $userReview->id }}/edit_review">Modifier ma review</a>
                     </div>
                 @else
                     <div>
-                        <a class="cta" href="/anime/{{ $anime['id'] }}/new_review">Écrire une critique</a>
+                        <a class="cta" href="/anime/{{ $anime['id'] }}/new_review">Ajouter une review</a>
                     </div>
                 @endif  
                 <form action="/anime/{{ $anime['id'] }}/add_to_watch_list" method="POST">
@@ -40,23 +41,25 @@
 
         <section class="reviewsContainer">
             @isset($userReview)
-                <div class="userReview"></div>
-                <p>Votre critique</p> 
-                <p>{{ $userReview->content }}</p>  
+                <div class="userReview">
+                    <div class="userReview__header">
+                        <span class="userReview__header--user">Ma review</span>
+                        <span>{{ $userReview->note }}/10</span>
+                    </div>
+                    <span class="userReview__content">{{ $userReview->content }}</span> 
+                </div>  
             @endisset
             @isset ($reviews)
                 <div class="otherReviews">
                     @foreach ($reviews as $review)  
                         <div class="otherReviews__review">
                             <div class="otherReviews__review__header">
-                                <p>Posté par : {{ $review->user_name }}</p>
-                                <p>{{ $review->note }}</p>
+                                <span  class="userReview__header--user">Posté par : {{ $review->user_name }}</span>
+                                <span>{{ $review->note }}/10</span>
                             </div>
                             
-                            <p>{{ $review->content }}</p>
-                        </div>
-                        
-                                    
+                            <span class="otherReviews__review__content">{{ $review->content }}</span>
+                        </div>        
                     @endforeach
                 </div> 
             @endisset

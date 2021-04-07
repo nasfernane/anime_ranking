@@ -175,7 +175,7 @@ nav button {
 
 .anime-list li {
   padding: 2rem;
-  outline: 2px dotted;
+  outline: 0.2rem dotted;
   box-sizing: content-box;
   display: flex;
   flex-direction: column;
@@ -228,3 +228,25 @@ article > * + * {
 article.anime {
   max-width: 100%;
   margin: 0 auto; }
+
+section.reviewsContainer .userReview,
+section.reviewsContainer .otherReviews__review {
+  margin-bottom: 1rem;
+  border: 0.2rem dotted black;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  section.reviewsContainer .userReview__header,
+  section.reviewsContainer .otherReviews__review__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid black;
+    font-weight: bold; }
+  section.reviewsContainer .userReview__content,
+  section.reviewsContainer .otherReviews__review__content {
+    font-style: italic;
+    margin: 0 auto; }

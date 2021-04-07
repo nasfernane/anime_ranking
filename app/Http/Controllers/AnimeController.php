@@ -16,6 +16,16 @@ class AnimeController extends Controller
         return view('welcome', ["animes" => $animes]);
     }
 
+    public function displayTopAnimes () {
+        $animes = DB::select('
+            SELECT *
+            FROM animes
+            ORDER BY avgRank DESC
+        ');
+
+        return view('top', ['animes' => $animes]);
+    }
+
     public function getSpecificAnime ($id) {
         // récupère l'anime selon l'id entré en paramètre dans l'url, avec les reviews qui lui sont associées
         $reviews = DB::select('
@@ -28,7 +38,8 @@ class AnimeController extends Controller
         // si on obtient au moins un résultat
         if (isset($reviews[0])) {
             // récupère les infos de l'anime dans un tableau à part pour gérer le template plus proprement
-            [$anime['title'], $anime['description'], $anime['cover'], $anime['id']] = [$reviews[0]->title, $reviews[0]->description, $reviews[0]->cover, $reviews[0]->id];
+            [$anime['title'], $anime['description'], $anime['cover'], $anime['id'], $anime['avgRank']] = [$reviews[0]->title, $reviews[0]->description, $reviews[0]->cover, $reviews[0]->anime_id, $reviews[0]->avgRank];
+
 
             // si l'anime dispose d'au moins une review
             if ($reviews[0]->content !== Null) {
@@ -48,7 +59,10 @@ class AnimeController extends Controller
                 return view('anime', ["reviews" => $reviews, "anime" => $anime]);
             }
             // si l'anime ne dispose pas de review, on renvoie seulement les informations sur l'anime
+            
+            $anime['id'] = $id;
             return view('anime', ["anime" => $anime]);
+            
         }
         // si l'id ne correspond à aucun anime, on renvoie vers la page d'accueuil
         return redirect ('/');
