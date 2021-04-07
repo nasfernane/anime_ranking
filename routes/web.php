@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\WatchlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,9 @@ Route::post('signout', [AuthController::class, 'signOut']);
 Route::get('/', [AnimeController::class, 'getAllAnimes']);
 Route::get('/top', [AnimeController::class, 'displayTopAnimes']);
 Route::get('/anime/{id}', [AnimeController::class, 'getSpecificAnime']);
+
+// routes liées aux watchlists
+Route::get('/watchlist', [WatchlistController::class, 'create']);
 
 // routes liées aux reviews
 Route::get('/anime/{id}/new_review', [ReviewController::class, 'newReview']);
