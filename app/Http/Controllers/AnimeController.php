@@ -13,6 +13,7 @@ use App\Models\Anime;
 class AnimeController extends Controller
 {
     public function displayTopAnimes () {
+        // récupère tous les animes triés par note moyenne en ordre décroissant
         $animes = DB::table('animes')->orderBy('avgRank', 'desc')->get();
         return view('top', ['animes' => $animes]);
     }
@@ -21,6 +22,7 @@ class AnimeController extends Controller
         // récupère l'anime selon l'id entré en paramètre dans l'url, avec les reviews qui lui sont associées
         $reviews = DB::table('animes')->where('animes.id', $id)->leftjoin('reviews', 'reviews.anime_id', '=', 'animes.id')->get();
         $anime = $reviews->first();
+        $anime->id = $anime->user_id;
 
         // si on obtient au moins un résultat
         if (isset($reviews[0])) {
@@ -38,6 +40,7 @@ class AnimeController extends Controller
                         return view('anime', ["reviews" => $reviews, "userReview" => $userReview, "anime" => $anime]);
                     }
                 }
+                
                 // si aucune review n'appartient à l'utilisateur, on renvoie les informations sur l'anime et toutes les reviews
                 return view('anime', ["reviews" => $reviews, "anime" => $anime]);
             }

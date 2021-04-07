@@ -7,25 +7,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Anime;
+use App\Models\User;
+
 class ReviewController extends Controller
 {
     // affiche la page pour écrire une nouvelle review 
     public function newReview ($animeId) {
         // si l'utilisateur est connecté
         if (Auth::check()) {
-            $userId = Auth::id();
-
-            $review = DB::select("SELECT * FROM reviews WHERE user_id = ? && anime_id = ?", [$userId, $animeId]);
             // récupère l'anime concerné
-            $anime = DB::select("SELECT * FROM animes WHERE id = ?", [$animeId])[0];
-            
-            if (!isset($review[0])) {
+            $anime = DB::table('animes')->where('animes.id', $animeId)->get()->first();
+
+            // vérifie si l'utilisateur a déjà soumis une review
+            $review = DB::table('reviews')->where(['user_id' => Auth::id(), 'anime_id' => $animeId])->get()->first();
+
+            // en l'absence de review appartenant à l'utilisateur
+            if (!$review) {
                 // affiche la page
                 return view('new_review', ["anime" => $anime]);
             } else {
-                return view('new_review', ["anime" => $anime, "userReview" => $review[0]]);
+                // sinon, ajoute sa review pour l'afficher à la place de l'input
+                return view('new_review', ["anime" => $anime, "userReview" => $review]);
             }
-            
         }
 
         return back()->withErrors([

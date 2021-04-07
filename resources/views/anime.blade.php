@@ -26,7 +26,7 @@
             <div class="actions">
                 @if (isset($userReview))
                     <div>
-                        <a class="cta" href="/anime/{{ $userReview->id }}/edit_review">Modifier ma review</a>
+                        <a class="cta" href="/anime/{{ $anime->id }}/edit_review">Modifier ma review</a>
                     </div>
                 @else
                     <div>
