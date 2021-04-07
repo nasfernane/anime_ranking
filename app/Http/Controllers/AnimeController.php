@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,38 +8,22 @@ use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\Cast\Object_;
 use SebastianBergmann\Type\NullType;
 
+use App\Models\Anime;
+
 class AnimeController extends Controller
 {
-    public function getAllAnimes () {
-        $animes = DB::select("SELECT * FROM animes");
-        return view('welcome', ["animes" => $animes]);
-    }
-
     public function displayTopAnimes () {
-        $animes = DB::select('
-            SELECT *
-            FROM animes
-            ORDER BY avgRank DESC
-        ');
-
+        $animes = DB::table('animes')->orderBy('avgRank', 'desc')->get();
         return view('top', ['animes' => $animes]);
     }
 
     public function getSpecificAnime ($id) {
         // récupère l'anime selon l'id entré en paramètre dans l'url, avec les reviews qui lui sont associées
-        $reviews = DB::select('
-            SELECT animes.*, reviews.*
-            FROM animes
-            LEFT JOIN reviews
-            ON reviews.anime_id = animes.id
-            WHERE animes.id = ?', [$id]);
+        $reviews = DB::table('animes')->where('animes.id', $id)->leftjoin('reviews', 'reviews.anime_id', '=', 'animes.id')->get();
+        $anime = $reviews->first();
 
         // si on obtient au moins un résultat
         if (isset($reviews[0])) {
-            // récupère les infos de l'anime dans un tableau à part pour gérer le template plus proprement
-            [$anime['title'], $anime['description'], $anime['cover'], $anime['id'], $anime['avgRank']] = [$reviews[0]->title, $reviews[0]->description, $reviews[0]->cover, $reviews[0]->anime_id, $reviews[0]->avgRank];
-
-
             // si l'anime dispose d'au moins une review
             if ($reviews[0]->content !== Null) {
                 // pour chaque review
@@ -58,6 +41,7 @@ class AnimeController extends Controller
                 // si aucune review n'appartient à l'utilisateur, on renvoie les informations sur l'anime et toutes les reviews
                 return view('anime', ["reviews" => $reviews, "anime" => $anime]);
             }
+
             // si l'anime ne dispose pas de review, on renvoie seulement les informations sur l'anime
             
             $anime['id'] = $id;

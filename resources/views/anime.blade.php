@@ -1,22 +1,22 @@
 <x-layout>
     <x-slot name="title">
-        {{ $anime['title'] }}
+        {{ $anime->title }}
     </x-slot>
 
     <article class="anime">
         <header class="anime__header">
             <div class="anime__header--cover">
-                <img alt="" src="/covers/{{ $anime['cover'] }}" />
+                <img alt="" src="/covers/{{ $anime->cover }}" />
             </div>
             <div class="anime__header--title">
-                <h1>{{ $anime['title'] }}</h1>
-                <p>Note moyenne des utilisateurs: <strong><span>{{ $anime['avgRank'] }}</span>/10</strong></p>
+                <h1>{{ $anime->title }}</h1>
+                <p>Note moyenne des utilisateurs: <strong><span>{{ $anime->avgRank }}</span>/10</strong></p>
             </div>
             
         </header>
 
         <section class="descriptionContainer">
-            <p>{{ $anime['description'] }}</p>
+            <p>{{ $anime->description }}</p>
         </section>
 
         <section class="actionsContainer">
@@ -30,10 +30,10 @@
                     </div>
                 @else
                     <div>
-                        <a class="cta" href="/anime/{{ $anime['id'] }}/new_review">Ajouter une review</a>
+                        <a class="cta" href="/anime/{{ $anime->id }}/new_review">Ajouter une review</a>
                     </div>
                 @endif  
-                <form action="/anime/{{ $anime['id'] }}/add_to_watch_list" method="POST">
+                <form action="/anime/{{ $anime->id }}/add_to_watch_list" method="POST">
                     <button class="cta">Ajouter à ma watchlist</button>
                 </form>
             </div>

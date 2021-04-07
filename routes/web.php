@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Anime;
 
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\ReviewController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\WatchlistController;
 */
 
 // routes basiques
+Route::view('/', 'welcome', ['animes' => Anime::All()]);
 Route::view('/login', 'login');
 Route::view('/signup', 'signup');
 
@@ -26,7 +28,7 @@ Route::post('signup', [AuthController::class, 'signUp']);
 Route::post('signout', [AuthController::class, 'signOut']);
 
 // routes liées aux animes
-Route::get('/', [AnimeController::class, 'getAllAnimes']);
+// Route::get('/', [AnimeController::class, 'getAllAnimes']);
 Route::get('/top', [AnimeController::class, 'displayTopAnimes']);
 Route::get('/anime/{id}', [AnimeController::class, 'getSpecificAnime']);
 
