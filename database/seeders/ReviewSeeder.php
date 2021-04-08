@@ -10,7 +10,7 @@ use App\Http\Controllers\AnimeController;
 
 use App\Models\User;
 use Database\Seeders\Spintax;
-use Faker;
+// use Faker;
 
 
 
@@ -28,7 +28,7 @@ class ReviewSeeder extends Seeder
     public function run()
     {
         // initialisation de faker pour créer du lorem ipsum
-        $faker = Faker\Factory::create('fr_FR');
+        // $faker = Faker\Factory::create('fr_FR');
 
         // récupère les utilisateurs et animes déjà créés
         $users = DB::table('users')->select('username')->get();
@@ -39,8 +39,10 @@ class ReviewSeeder extends Seeder
             for ($i = 1; $i <= $animes->count(); $i++) {
                 // utilise le générateur de texte pour générer une review aléatoirement
                 $spintax = new Spintax();
+                // note aléatoire
                 $note = rand(1, 10);
 
+                // génère la review en fonction de la note
                 switch ($note) {
                     case 10:
                         $randomReview = $spintax->process($spintax->strings['stringPerfect']);
