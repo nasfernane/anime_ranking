@@ -1,3 +1,14 @@
+<?php
+    $color = '';
+    if ($anime->avgRank > 6) {
+        $color = 'green';
+    } else if ($anime->avgRank > 4) {
+        $color = 'white';
+    } else {
+        $color = 'red';
+    }
+?>
+
 <x-layout>
     <x-slot name="title">
         {{ $anime->title }}
@@ -10,7 +21,7 @@
             </div>
             <div class="anime__header--title">
                 <h1>{{ $anime->title }}</h1>
-                <p>Note moyenne des utilisateurs: <strong><span>{{ $anime->avgRank }}</span>/10</strong></p>
+                <p>Note moyenne des utilisateurs: <strong class="animeRank"><span class="animeRank__note animeRank__note--{{ $color }}">{{ $anime->avgRank }}</span> / 10</strong></p>
             </div>
             
         </header>
@@ -44,7 +55,7 @@
                         <span>{{ $userReview->note }}/10</span>
                     </div>
                     <span class="userReview__content">{{ $userReview->content }}</span> 
-                    <div>
+                    <div class="userReview__actions">
                         <form action="/review/{{ $userReview->id }}/edit" method="POST">
                             @csrf
                             <button class="cta">Modifier ma review</button>

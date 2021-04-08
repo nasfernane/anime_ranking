@@ -21,8 +21,7 @@ class ReviewController extends Controller
         // si l'utilisateur est connecté
         if (Auth::check()) {
             // récupère l'anime concerné
-            $anime = DB::table('animes')->where('animes.id', $animeId)->get()->first();
-
+            $anime = Anime::find($animeId);
             // vérifie si l'utilisateur a déjà soumis une review
             $review = DB::table('reviews')->where(['user_id' => Auth::id(), 'anime_id' => $animeId])->get()->first();
 
@@ -67,12 +66,15 @@ class ReviewController extends Controller
     }
 
     public function edit (int $id) {
-        // récupération de la review
+
+        // récupération de la review et de l'anime correspondant
         $review = Review::find($id);
+        $anime = Anime::find($review->anime_id);
+
         // si la review appartient à l'utilisateur connecté
         if ($review->user_id === Auth::id()) {
-            // retourne la vue d'édition avec les informations de la review
-            return view('edit_review', ['userReview' => $review]);
+            // retourne la vue d'édition avec les informations
+            return view('edit_review', ['userReview' => $review, 'anime' => $anime]);
         }
 
         // sinon, redirige vers la page d'accueil
@@ -92,5 +94,25 @@ class ReviewController extends Controller
 
         // sinon, redirige vers la page d'accueil
         return redirect ('/');
+    }
+
+    public function update (Request $request, int $reviewId) {
+        // vérification des données entrées en input
+        $validated = $request->validate([
+            "content" => "required|string",
+            "note" => "required|integer",
+          ]);
+
+        // Mise à jour de la review
+        $review = Review::find($reviewId);
+        $review->content = $validated['content'];
+        $review->note = $validated['note'];
+        $review->save();
+
+        // maj note moyenne sur l'anime
+        AnimeController::updateAvgRank($review->anime_id);
+
+        // redirige vers la page de l'anime
+        return redirect("/anime/$review->anime_id");
     }
 }

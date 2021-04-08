@@ -41,6 +41,7 @@ Route::get('/anime/{id}/new_review', [ReviewController::class, 'newReview']);
 Route::post('/anime/{id}/new_review', [ReviewController::class, 'addReview']);
 Route::post('/review/{id}/edit', [ReviewController::class, 'edit']);
 Route::post('/review/{id}/delete', [ReviewController::class, 'delete']);
+Route::post('/review/{id}/update', [ReviewController::class, 'update']);
 
 
 

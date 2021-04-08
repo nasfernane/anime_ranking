@@ -1,10 +1,39 @@
-.anime-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-    grid-gap: 4rem;
+.top-list {
+    display: flex;
+    flex-direction: column;
+
+    &__anime {
+        width: 100%;
+        padding: 2rem;
+        outline: 0.2rem dotted;
+        box-sizing: content-box;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 3rem;
+
+        &__img {
+            width: 40%;
+        }
+
+        &__content {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+
+            h2 {
+                display: block;
+                width: auto;
+                border: 1px solid black;
+            }
+
+            .animeRank {
+                width: 30%;
+            }
+        }
+    }
 }
 
-.anime-list li {
+.top-list li {
     padding: 2rem;
     outline: 0.2rem dotted;
     box-sizing: content-box;
@@ -13,11 +42,11 @@
     justify-content: space-between;
 }
 
-.anime-list img {
+.top-list img {
     border: 4px solid;
 }
 
-.anime-list h2 {
+.top-list h2 {
     font-size: 1.1rem;
 }
 
@@ -86,43 +115,4 @@ article > * + * {
     //         // }
     //     }
     // }
-}
-
-article.anime {
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-section.reviewsContainer {
-    .userReview,
-    .otherReviews__review {
-        margin-bottom: 1rem;
-        border: 0.2rem dotted black;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        &__header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding-bottom: 0.5rem;
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid black;
-            font-weight: bold;
-        }
-
-        &__content {
-            font-style: italic;
-            margin: 0 auto;
-            margin-bottom: 1rem;
-        }
-
-        &__actions {
-            display: flex;
-            width: 100%;
-            justify-content: space-around;
-        }
-    }
 }

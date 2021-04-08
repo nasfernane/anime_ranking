@@ -13,11 +13,11 @@
         <p>{{ $anime->description }}</p>
         <div>
             <div class="actions">
-                <form action="/anime/{{ $anime->id }}/new_review" method="POST">
+                <form action="/review/{{ $userReview->id }}/update" method="POST">
                     @csrf
                     <div class="input-group input__group--range">
                         <label for="note">Votre note</label>
-                        <input type="range" id="note" name="note" required min="0" max="10" step="1" list="notelist"/>
+                        <input type="range" id="note" name="note" required min="0" max="10" step="1" list="notelist" value="{{ $userReview->note }}"/>
                         <datalist id="notelist" class="range__list">
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -35,12 +35,12 @@
 
                     <div class="input-group">
                         <label for="content">Votre critique</label>
-                        <input type="text" id="content" name="content" required />
+                        <input type="text" id="content" name="content" required value="{{ $userReview->content }}"/>
                         @error('username')
                         <p class="error">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button class="cta">Ajouter</button>
+                    <button class="cta">Modifier</button>
                 </form>
             </div>
         </div>

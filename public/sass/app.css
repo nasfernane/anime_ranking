@@ -104,6 +104,18 @@ h2 {
       height: auto;
       text-indent: 0; }
 
+.animeRank {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 0.3rem 0.6rem;
+  background-color: #ccc; }
+  .animeRank__note {
+    color: white; }
+    .animeRank__note--green {
+      color: green; }
+    .animeRank__note--red {
+      color: red; }
+
 main {
   max-width: 40%;
   margin: 5rem auto;
@@ -249,4 +261,86 @@ section.reviewsContainer .otherReviews__review {
   section.reviewsContainer .userReview__content,
   section.reviewsContainer .otherReviews__review__content {
     font-style: italic;
-    margin: 0 auto; }
+    margin: 0 auto;
+    margin-bottom: 1rem; }
+  section.reviewsContainer .userReview__actions,
+  section.reviewsContainer .otherReviews__review__actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-around; }
+
+.top-list {
+  display: flex;
+  flex-direction: column; }
+  .top-list__anime {
+    width: 100%;
+    padding: 2rem;
+    outline: 0.2rem dotted;
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3rem; }
+    .top-list__anime__img {
+      width: 40%; }
+    .top-list__anime__content {
+      width: 40%;
+      display: flex;
+      flex-direction: column; }
+      .top-list__anime__content h2 {
+        display: block;
+        width: auto;
+        border: 1px solid black; }
+      .top-list__anime__content .animeRank {
+        width: 30%; }
+
+.top-list li {
+  padding: 2rem;
+  outline: 0.2rem dotted;
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.top-list img {
+  border: 4px solid; }
+
+.top-list h2 {
+  font-size: 1.1rem; }
+
+.anime .actions {
+  display: flex;
+  margin: -1rem; }
+
+.anime .actions > * {
+  margin: 1rem; }
+
+.cta {
+  cursor: pointer;
+  border: 2px solid;
+  text-align: center;
+  padding: 0.25rem;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  color: inherit;
+  box-shadow: 0.25rem 0.25rem 0 black;
+  background: white; }
+
+article > * + * {
+  margin-top: 4rem; }
+
+.anime h1 {
+  font-size: 2.5rem;
+  line-height: 1.2; }
+
+.anime img {
+  border: 2px solid;
+  max-width: 10rem;
+  margin-right: 4rem;
+  box-shadow: 0.25rem 0.25rem 0 black; }
+
+.anime__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start; }
