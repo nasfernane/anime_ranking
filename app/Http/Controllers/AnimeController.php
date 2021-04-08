@@ -55,7 +55,6 @@ class AnimeController extends Controller
             }
 
             // si l'anime ne dispose pas de review, on renvoie seulement les informations sur l'anime
-            
             $anime['id'] = $id;
             return view('anime', ["anime" => $anime]);
             
