@@ -15,17 +15,6 @@ use App\Http\Controllers\AnimeController;
 
 class ReviewController extends Controller
 {
-    public function updateAvgRank (int $animeId) {
-        $avg_rank = round(collect(DB::select('
-            SELECT reviews.note 
-            FROM reviews
-            WHERE reviews.anime_id = ?', [$animeId]
-        ))->avg('note'), 1);
-
-        DB::update("UPDATE animes
-                    SET avgRank = $avg_rank
-                    WHERE id = $animeId");
-    }
 
     // affiche la page pour écrire une nouvelle review 
     public function newReview (int $animeId) {
