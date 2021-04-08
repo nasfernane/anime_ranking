@@ -9,11 +9,26 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Anime;
 use App\Models\User;
+use App\Models\Review;
+
+use App\Http\Controllers\AnimeController;
 
 class ReviewController extends Controller
 {
+    public function updateAvgRank (int $animeId) {
+        $avg_rank = round(collect(DB::select('
+            SELECT reviews.note 
+            FROM reviews
+            WHERE reviews.anime_id = ?', [$animeId]
+        ))->avg('note'), 1);
+
+        DB::update("UPDATE animes
+                    SET avgRank = $avg_rank
+                    WHERE id = $animeId");
+    }
+
     // affiche la page pour écrire une nouvelle review 
-    public function newReview ($animeId) {
+    public function newReview (int $animeId) {
         // si l'utilisateur est connecté
         if (Auth::check()) {
             // récupère l'anime concerné
@@ -38,30 +53,25 @@ class ReviewController extends Controller
 
     }
 
+    // ajout de la review utilisateur
     public function addReview (Request $request, $animeId) {
+        // vérification des données entrées en input
         $validated = $request->validate([
             "content" => "required|string",
             "note" => "required|integer",
           ]);
-        
-        DB::insert('INSERT INTO reviews (content, anime_id, user_id, note, user_name)
-            VALUES (:content, :anime_id, :user_id, :note, :user_name)', ['content' => $validated['content'],
-                'anime_id' => $animeId, 
-                'user_id' => Auth::id(),
-                'note' => $validated['note'],
-                'user_name' => Auth::user()->username
-            ]);
 
-        // calcul de la note moyenne, arrondie sur la première décimale
-        $avg_rank = round(collect(DB::select('
-            SELECT reviews.note 
-            FROM reviews
-            WHERE reviews.anime_id = ?', [$animeId]
-        ))->avg('note'), 1);
+        // ajout d'une review sur la base du modèle
+        $review = new Review();
+        $review->content = $validated['content'];
+        $review->note = $validated['note'];
+        $review->anime_id = $animeId;
+        $review->user_id = Auth::id();
+        $review->user_name = Auth::user()->username;
+        $review->save();
 
-        DB::update("UPDATE animes
-                    SET avgRank = $avg_rank
-                    WHERE id = $animeId");
+        // maj note moyenne sur l'anime
+        AnimeController::updateAvgRank($animeId);
 
         return back();
     }

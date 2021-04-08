@@ -12,17 +12,26 @@ use App\Models\Anime;
 
 class AnimeController extends Controller
 {
+    // mise à jour de la note moyenne d'un anime
+    static function updateAvgRank ($animeId) {
+        // mise à jour de la note moyenne d'un anime
+        $avg_rank = DB::table('reviews')->where('anime_id', '=', $animeId)->get()->avg('note');
+        DB::table('animes')->where('id', $animeId)->update(['avgRank' => $avg_rank]);
+    }
+
+    // affichage des animes selon leur note moyenne
     public function displayTopAnimes () {
         // récupère tous les animes triés par note moyenne en ordre décroissant
         $animes = DB::table('animes')->orderBy('avgRank', 'desc')->get();
         return view('top', ['animes' => $animes]);
     }
 
+    // affichage d'un anime
     public function getSpecificAnime ($id) {
         // récupère l'anime selon l'id entré en paramètre dans l'url, avec les reviews qui lui sont associées
         $reviews = DB::table('animes')->where('animes.id', $id)->leftjoin('reviews', 'reviews.anime_id', '=', 'animes.id')->get();
         $anime = $reviews->first();
-        $anime->id = $anime->user_id;
+        $anime->id = $anime->anime_id;
 
         // si on obtient au moins un résultat
         if (isset($reviews[0])) {
