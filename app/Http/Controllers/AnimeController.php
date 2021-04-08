@@ -66,4 +66,5 @@ class AnimeController extends Controller
         return redirect ('/');
         
     }
+
 }

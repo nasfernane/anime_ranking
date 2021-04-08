@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\User;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,9 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        User::factory()->count(15)->create();
+
         $this->call([
             AnimeSeeder::class,
-            UserSeeder::class,
             ReviewSeeder::class
         ]);
     }

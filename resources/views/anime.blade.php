@@ -24,11 +24,7 @@
                 <p>Vous devez être connecté pour ajouter une critique <a href="/login"> Se connecter</a></p>
             @enderror
             <div class="actions">
-                @if (isset($userReview))
-                    <div>
-                        <a class="cta" href="/anime/{{ $anime->id }}/edit_review">Modifier ma review</a>
-                    </div>
-                @else
+                @if (!isset($userReview))                   
                     <div>
                         <a class="cta" href="/anime/{{ $anime->id }}/new_review">Ajouter une review</a>
                     </div>
@@ -48,6 +44,16 @@
                         <span>{{ $userReview->note }}/10</span>
                     </div>
                     <span class="userReview__content">{{ $userReview->content }}</span> 
+                    <div>
+                        <form action="/review/{{ $userReview->id }}/edit" method="POST">
+                            @csrf
+                            <button class="cta">Modifier ma review</button>
+                        </form>
+                        <form action="/review/{{ $userReview->id }}/delete" method="POST">
+                            @csrf
+                            <button class="cta">Supprimer ma review</button>
+                        </form>
+                    </div>
                 </div>  
             @endisset
             @isset ($reviews)
@@ -57,8 +63,7 @@
                             <div class="otherReviews__review__header">
                                 <span  class="userReview__header--user">Posté par : {{ $review->user_name }}</span>
                                 <span>{{ $review->note }}/10</span>
-                            </div>
-                            
+                            </div>                           
                             <span class="otherReviews__review__content">{{ $review->content }}</span>
                         </div>        
                     @endforeach

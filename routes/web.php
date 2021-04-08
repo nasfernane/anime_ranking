@@ -39,6 +39,12 @@ Route::post('/anime/{id}/add_to_watch_list', [WatchlistController::class, 'addTo
 // routes liées aux reviews
 Route::get('/anime/{id}/new_review', [ReviewController::class, 'newReview']);
 Route::post('/anime/{id}/new_review', [ReviewController::class, 'addReview']);
+Route::post('/review/{id}/edit', [ReviewController::class, 'edit']);
+Route::post('/review/{id}/delete', [ReviewController::class, 'delete']);
+
+
+
+
 
 
 

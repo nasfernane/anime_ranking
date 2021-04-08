@@ -43,7 +43,7 @@ class ReviewController extends Controller
     }
 
     // ajout de la review utilisateur
-    public function addReview (Request $request, $animeId) {
+    public function addReview (Request $request, int $animeId) {
         // vérification des données entrées en input
         $validated = $request->validate([
             "content" => "required|string",
@@ -62,6 +62,35 @@ class ReviewController extends Controller
         // maj note moyenne sur l'anime
         AnimeController::updateAvgRank($animeId);
 
-        return back();
+        // redirige vers la page de l'anime
+        return redirect("/anime/$animeId");
+    }
+
+    public function edit (int $id) {
+        // récupération de la review
+        $review = Review::find($id);
+        // si la review appartient à l'utilisateur connecté
+        if ($review->user_id === Auth::id()) {
+            // retourne la vue d'édition avec les informations de la review
+            return view('edit_review', ['userReview' => $review]);
+        }
+
+        // sinon, redirige vers la page d'accueil
+        return redirect ('/');
+    }
+
+    public function delete (int $id) {
+        // récupération de la review
+        $review = Review::find($id);
+        // dd($review);
+        // si la review appartient à l'utilisateur connecté
+        if ($review->user_id === Auth::id()) {
+            // supprime la review et revient sur la page de l'anime 
+            $review->delete();
+            return back();
+        }
+
+        // sinon, redirige vers la page d'accueil
+        return redirect ('/');
     }
 }
