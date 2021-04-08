@@ -12,8 +12,9 @@ class WatchlistController extends Controller
 {
     public function index () {
         if (Auth::check()) {
-            $watchlist = DB::table('watchlists')->where('user_id', '=', Auth::id())->get();
-            dd($watchlist);
+            $watchlist = DB::table('watchlists')->where('user_id', Auth::id())->leftjoin('animes', 'animes.id', '=', 'watchlists.anime_id')->get();
+            return view('watchlist', ['watchlist' => $watchlist]);
+
         }
         // DB::insert('INSERT INTO watchlists (anime_id, user_id) VALUES (:anime_id, :user_id)', ['anime_id' => 3, 'user_id' => 2]);
 
@@ -26,6 +27,8 @@ class WatchlistController extends Controller
             $watchlist->user_id = Auth::id();
             $watchlist->anime_id = $animeId;
             $watchlist->save();
+
+            return redirect ('/watchlist');
         }
 
         return redirect('/login');

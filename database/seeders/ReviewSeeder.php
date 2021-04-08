@@ -6,6 +6,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
+use App\Http\Controllers\AnimeController;
+
+
 class ReviewSeeder extends Seeder
 {
     /**
@@ -327,75 +330,6 @@ class ReviewSeeder extends Seeder
         ]);
 
         // mise à jour des notes moyennes
-
-        $avg_rank1 = round(collect(DB::select('
-            SELECT reviews.note 
-            FROM reviews
-            WHERE reviews.anime_id = ?', [1]
-        ))->avg('note'), 1);
-
-        DB::update("UPDATE animes
-                    SET avgRank = $avg_rank1
-                    WHERE id = 1");
-
-        $avg_rank2 = round(collect(DB::select('
-        SELECT reviews.note 
-        FROM reviews
-        WHERE reviews.anime_id = ?', [2]
-        ))->avg('note'), 1);
-
-        DB::update("UPDATE animes
-                SET avgRank = $avg_rank2
-                WHERE id = 2");
-
-        $avg_rank3 = round(collect(DB::select('
-        SELECT reviews.note 
-        FROM reviews
-        WHERE reviews.anime_id = ?', [3]
-        ))->avg('note'), 1);
-
-        DB::update("UPDATE animes
-                SET avgRank = $avg_rank3
-                WHERE id = 3");
-
-        $avg_rank4 = round(collect(DB::select('
-        SELECT reviews.note 
-        FROM reviews
-        WHERE reviews.anime_id = ?', [4]
-        ))->avg('note'), 1);
-
-        DB::update("UPDATE animes
-                SET avgRank = $avg_rank4
-                WHERE id = 4");
-
-        $avg_rank5 = round(collect(DB::select('
-        SELECT reviews.note 
-        FROM reviews
-        WHERE reviews.anime_id = ?', [5]
-        ))->avg('note'), 1);
-
-        DB::update("UPDATE animes
-                SET avgRank = $avg_rank5
-                WHERE id = 5");
-
-        $avg_rank6 = round(collect(DB::select('
-        SELECT reviews.note 
-        FROM reviews
-        WHERE reviews.anime_id = ?', [6]
-        ))->avg('note'), 1);
-
-        DB::update("UPDATE animes
-                SET avgRank = $avg_rank6
-                WHERE id = 6");
-
-        $avg_rank7 = round(collect(DB::select('
-        SELECT reviews.note 
-        FROM reviews
-        WHERE reviews.anime_id = ?', [7]
-        ))->avg('note'), 1);
-
-        DB::update("UPDATE animes
-                SET avgRank = $avg_rank7
-                WHERE id = 7");
+        AnimeController::updateAvgRank(1, 2, 3, 4, 5, 6, 7);
     }
 }

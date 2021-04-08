@@ -34,6 +34,7 @@
                     </div>
                 @endif  
                 <form action="/anime/{{ $anime->id }}/add_to_watch_list" method="POST">
+                    @csrf
                     <button class="cta">Ajouter à ma watchlist</button>
                 </form>
             </div>
