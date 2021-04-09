@@ -13,8 +13,8 @@
       <div class="inner">
         <nav>
           <a class="logo" href="/">Anime Ranking</a>
-          <a href="/top">Top</a>
-          <a href="/watchlist">Ma watchlist</a>
+          <a href="/animes/top">Top</a>
+          <a href="/watchlist/index">Ma watchlist</a>
         </nav>
         <nav>
           @auth

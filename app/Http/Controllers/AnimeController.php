@@ -38,8 +38,13 @@ class AnimeController extends Controller
         return $anime;
     }
 
+    // affiche tous les animes dans la page principale
+    public function index () {
+        return view('welcome', ['animes' => Anime::All()]);
+    }
+
     // affichage des animes selon leur note moyenne
-    public function displayTopAnimes () {
+    public function displayTop () {
         // récupère tous les animes triés par note moyenne en ordre décroissant
         $animes = DB::table('animes')->orderBy('avgRank', 'desc')->get();
 
@@ -53,7 +58,7 @@ class AnimeController extends Controller
     }
 
     // affichage d'un anime
-    public function getSpecificAnime ($id) {
+    public function show ($id) {
         // récupère l'anime selon l'id entré en paramètre dans l'url, avec les reviews qui lui sont associées
         $reviews = DB::table('animes')->where('animes.id', $id)->leftjoin('reviews', 'reviews.anime_id', '=', 'animes.id')->get();
         $anime = $reviews->first();

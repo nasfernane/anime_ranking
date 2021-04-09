@@ -24,7 +24,7 @@
                 </h2>
                 <p>{{ $anime->description }}</p>
                 <div class="top-list__anime__content--actions">
-                    <a class="cta" href="/anime/{{ $anime->id }}">Reviews</a>
+                    <a class="cta" href="/animes/{{ $anime->id }}">Reviews</a>
                     <form action="/watchlist/{{ $anime->id }}/add" method="POST">
                         @csrf
                         <button class="cta">Ajouter à ma watchlist</button>

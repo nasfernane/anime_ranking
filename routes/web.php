@@ -1,10 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\User;
-use App\Models\Anime;
 
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\ReviewController;
@@ -18,7 +14,10 @@ use App\Http\Controllers\WatchlistController;
 */
 
 // routes basiques
-Route::view('/', 'welcome', ['animes' => Anime::All()]);
+Route::get('/', function ()  { 
+    return redirect('/animes');
+});
+
 Route::view('/login', 'login');
 Route::view('/signup', 'signup');
 
@@ -28,21 +27,32 @@ Route::post('/signup', [AuthController::class, 'signUp']);
 Route::post('/signout', [AuthController::class, 'signOut']);
 
 // routes liées aux animes
-// Route::get('/', [AnimeController::class, 'getAllAnimes']);
-Route::get('/top', [AnimeController::class, 'displayTopAnimes']);
-Route::get('/anime/{id}', [AnimeController::class, 'getSpecificAnime']);
+Route::prefix('/animes')->name('animes.')->group(function () {
+    Route::get('/', [AnimeController::class, 'index'])->name('index');
+    Route::get('/top', [AnimeController::class, 'displayTop'])->name('top');
+    Route::get('/{id}', [AnimeController::class, 'show'])->name('show');
+});
+
 
 // routes liées aux watchlists
-Route::get('/watchlist', [WatchlistController::class, 'index']);
-Route::post('/watchlist/{id}/add', [WatchlistController::class, 'create']);
-Route::post('/watchlist/{id}/delete', [WatchlistController::class, 'delete']);
+Route::prefix('/watchlist')->name('watchlist.')->group(function () {
+    Route::get('/index', [WatchlistController::class, 'index'])->name('index');
+    Route::post('/{id}/store', [WatchlistController::class, 'store'])->name('store');
+    Route::post('/{id}/destroy', [WatchlistController::class, 'destroy'])->name('destroy');
+});
 
 // routes liées aux reviews
-Route::get('/review/{id}/create', [ReviewController::class, 'create']);
-Route::post('/review/{id}/store', [ReviewController::class, 'store']);
-Route::post('/review/{id}/edit', [ReviewController::class, 'edit']);
-Route::post('/review/{id}/delete', [ReviewController::class, 'destroy']);
-Route::post('/review/{id}/update', [ReviewController::class, 'update']);
+Route::prefix('/review')->name('review.')->group(function () {
+    Route::get('/{id}/create', [ReviewController::class, 'create'])->name('create');
+    Route::post('/{id}/store', [ReviewController::class, 'store'])->name('store');
+    Route::post('/{id}/edit', [ReviewController::class, 'edit'])->name('edit');
+    Route::post('/{id}/delete', [ReviewController::class, 'destroy'])->name('destroy');
+    Route::post('/{id}/update', [ReviewController::class, 'update'])->name('update');
+});
+
+
+
+
 
 
 

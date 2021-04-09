@@ -70,7 +70,7 @@ class ReviewController extends Controller
         AnimeController::updateAvgRank($animeId);
 
         // redirige vers la page de l'anime
-        return redirect("/anime/$animeId");
+        return redirect("/animes/$animeId");
     }
 
     
@@ -112,7 +112,7 @@ class ReviewController extends Controller
         AnimeController::updateAvgRank($review->anime_id);
 
         // redirige vers la page de l'anime
-        return redirect("/anime/$review->anime_id");
+        return redirect("/animes/$review->anime_id");
     }
 
     

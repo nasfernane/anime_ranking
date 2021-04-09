@@ -42,7 +42,7 @@
                         <a class="cta" href="/review/{{ $anime->id }}/create">Ajouter une review</a>
                     </div>
                 @endif  
-                <form action="/watchlist/{{ $anime->id }}/add" method="POST">
+                <form action="/watchlist/{{ $anime->id }}/store" method="POST">
                     @csrf
                     <button class="cta">Ajouter à ma watchlist</button>
                 </form>

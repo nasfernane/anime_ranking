@@ -10,7 +10,7 @@
             {{ $anime->title }}
           </h2>
         </div>
-        <a class="cta" href="/anime/{{ $anime->id }}">Voir</a>
+        <a class="cta" href="/animes/{{ $anime->id }}">Voir</a>
       </li>
     @endforeach
   </ul>
