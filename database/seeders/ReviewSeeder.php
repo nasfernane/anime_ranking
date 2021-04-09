@@ -27,9 +27,6 @@ class ReviewSeeder extends Seeder
      
     public function run()
     {
-        // initialisation de faker pour créer du lorem ipsum
-        // $faker = Faker\Factory::create('fr_FR');
-
         // récupère les utilisateurs et animes déjà créés
         $users = DB::table('users')->select('username')->get();
         $animes = DB::table('animes')->select('id')->get();
@@ -68,11 +65,6 @@ class ReviewSeeder extends Seeder
                 
 
                 DB::table('reviews')->insert([
-                    // première version: chaîne de carractères composée aléatoirement d'un nombre entre 15 et 50 caractères
-                    // 'content' => Str::random(rand(15, 50)),
-                    // deuxième version: Utilisation de faker pour génrer du Lorem Ipsum
-                    // 'content' => $faker->text,
-                    // troisième version: Générateur de review aléatoire basée sur la classe Spintax
                     'content' => $randomReview,
                     'anime_id' => $i,
                     'user_id' => $key + 1,

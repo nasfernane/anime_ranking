@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,13 +10,24 @@ use App\Models\Anime;
 use App\Models\User;
 use App\Models\Review;
 
+use App\Http\Requests\StoreReview;
+use App\Http\Requests\UpdateReview;
+
 use App\Http\Controllers\AnimeController;
+
+
 
 class ReviewController extends Controller
 {
+    
+    public function index()
+    {
+        //
+    }
 
-    // affiche la page pour écrire une nouvelle review 
-    public function newReview (int $animeId) {
+    // affiche le formulaire pour créer une nouvelle review
+    public function create(int $animeId)
+    {
         // si l'utilisateur est connecté
         if (Auth::check()) {
             // récupère l'anime concerné
@@ -35,19 +45,17 @@ class ReviewController extends Controller
             }
         }
 
+        // si l'utilisateur n'est pas connecté, retourne l'erreur
         return back()->withErrors([
             'reviewconnexion' => 'Vous devez vous connecter pour ajouter une review',
           ]);
-
     }
 
-    // ajout de la review utilisateur
-    public function addReview (Request $request, int $animeId) {
+    
+    public function store(StoreReview $request, int $animeId)
+    {
         // vérification des données entrées en input
-        $validated = $request->validate([
-            "content" => "required|string",
-            "note" => "required|integer",
-          ]);
+        $validated = $request->validated();
 
         // ajout d'une review sur la base du modèle
         $review = new Review();
@@ -65,8 +73,15 @@ class ReviewController extends Controller
         return redirect("/anime/$animeId");
     }
 
-    public function edit (int $id) {
+    
+    public function show($id)
+    {
+        //
+    }
 
+    
+    public function edit($id)
+    {
         // récupération de la review et de l'anime correspondant
         $review = Review::find($id);
         $anime = Anime::find($review->anime_id);
@@ -81,7 +96,28 @@ class ReviewController extends Controller
         return redirect ('/');
     }
 
-    public function delete (int $id) {
+    
+    public function update(UpdateReview $request, $id)
+    {
+        // vérification des données entrées en input
+        $validated = $request->validated();
+
+        // Mise à jour de la review
+        $review = Review::find($id);
+        $review->content = $validated['content'];
+        $review->note = $validated['note'];
+        $review->save();
+
+        // maj note moyenne sur l'anime
+        AnimeController::updateAvgRank($review->anime_id);
+
+        // redirige vers la page de l'anime
+        return redirect("/anime/$review->anime_id");
+    }
+
+    
+    public function destroy($id)
+    {
         // récupération de la review
         $review = Review::find($id);
         // dd($review);
@@ -94,25 +130,5 @@ class ReviewController extends Controller
 
         // sinon, redirige vers la page d'accueil
         return redirect ('/');
-    }
-
-    public function update (Request $request, int $reviewId) {
-        // vérification des données entrées en input
-        $validated = $request->validate([
-            "content" => "required|string",
-            "note" => "required|integer",
-          ]);
-
-        // Mise à jour de la review
-        $review = Review::find($reviewId);
-        $review->content = $validated['content'];
-        $review->note = $validated['note'];
-        $review->save();
-
-        // maj note moyenne sur l'anime
-        AnimeController::updateAvgRank($review->anime_id);
-
-        // redirige vers la page de l'anime
-        return redirect("/anime/$review->anime_id");
     }
 }

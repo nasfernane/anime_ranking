@@ -24,7 +24,6 @@
                     {{ $anime->title }}
                     @include ('components.avg_rank')
                 </h1>
-                {{-- <p>Note moyenne des utilisateurs: <strong class="animeRank"><span class="animeRank__note animeRank__note--{{ $color }}">{{ $anime->avgRank }}</span> / 10</strong></p> --}}
             </div>
             
         </header>
@@ -40,7 +39,7 @@
             <div class="actions">
                 @if (!isset($userReview))                   
                     <div>
-                        <a class="cta" href="/anime/{{ $anime->id }}/new_review">Ajouter une review</a>
+                        <a class="cta" href="/review/{{ $anime->id }}/create">Ajouter une review</a>
                     </div>
                 @endif  
                 <form action="/watchlist/{{ $anime->id }}/add" method="POST">

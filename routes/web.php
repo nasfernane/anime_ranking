@@ -24,8 +24,8 @@ Route::view('/signup', 'signup');
 
 // routes liées à l'authentification
 Route::post('/login', [AuthController::class, 'logIn']);
-Route::post('signup', [AuthController::class, 'signUp']);
-Route::post('signout', [AuthController::class, 'signOut']);
+Route::post('/signup', [AuthController::class, 'signUp']);
+Route::post('/signout', [AuthController::class, 'signOut']);
 
 // routes liées aux animes
 // Route::get('/', [AnimeController::class, 'getAllAnimes']);
@@ -38,10 +38,10 @@ Route::post('/watchlist/{id}/add', [WatchlistController::class, 'create']);
 Route::post('/watchlist/{id}/delete', [WatchlistController::class, 'delete']);
 
 // routes liées aux reviews
-Route::get('/anime/{id}/new_review', [ReviewController::class, 'newReview']);
-Route::post('/anime/{id}/new_review', [ReviewController::class, 'addReview']);
+Route::get('/review/{id}/create', [ReviewController::class, 'create']);
+Route::post('/review/{id}/store', [ReviewController::class, 'store']);
 Route::post('/review/{id}/edit', [ReviewController::class, 'edit']);
-Route::post('/review/{id}/delete', [ReviewController::class, 'delete']);
+Route::post('/review/{id}/delete', [ReviewController::class, 'destroy']);
 Route::post('/review/{id}/update', [ReviewController::class, 'update']);
 
 

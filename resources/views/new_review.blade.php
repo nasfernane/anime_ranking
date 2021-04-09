@@ -14,7 +14,7 @@
     <div>
       <div class="actions">
         @if  (!isset($userReview))
-            <form action="/anime/{{ $anime->id }}/new_review" method="POST">
+            <form action="/review/{{ $anime->id }}/store" method="POST">
             @csrf
             <div class="input-group input__group--range">
                 <label for="note">Votre note</label>
