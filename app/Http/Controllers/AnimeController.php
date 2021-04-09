@@ -21,9 +21,8 @@ class AnimeController extends Controller
         }
     }
 
-    // ajoute vision globale des notes à une collection d'animes
-    public function addOverallRanks ($animes) {
-        foreach ($animes as $anime) {
+    // ajoute vision globale des notes à un anime
+    public function addOverallRanks ($anime) {
             $overallRanks = [];
             $reviews = DB::table('reviews')->where('anime_id', $anime->id)->get()->groupBy('note');
             foreach ($reviews as $review) {
@@ -31,21 +30,25 @@ class AnimeController extends Controller
             }
             // trie le tableau par ordre numérique naturel
             ksort($overallRanks, SORT_NATURAL);
-            // ajoute le tableau à chaque anime
+            // ajoute le tableau à l'anime
             $anime->overallRanks = $overallRanks;
-        }
+        
 
         // retourne la collection
-        return $animes;
+        return $anime;
     }
 
     // affichage des animes selon leur note moyenne
     public function displayTopAnimes () {
         // récupère tous les animes triés par note moyenne en ordre décroissant
         $animes = DB::table('animes')->orderBy('avgRank', 'desc')->get();
+
+        // ajoute le détail des notes sur chaque anime
+        foreach ($animes as $anime) {
+            $anime = $this->addOverallRanks($anime);
+        }
         
-        // ajoute le détail des notes
-        $animes = $this->addOverallRanks($animes);
+       
         return view('top', ['animes' => $animes]);
     }
 
@@ -56,6 +59,7 @@ class AnimeController extends Controller
         $anime = $reviews->first();
         $anime->id = $anime->anime_id;
         
+        $anime = $this->addOverallRanks($anime);
 
         // si on obtient au moins un résultat
         if (isset($reviews[0])) {
