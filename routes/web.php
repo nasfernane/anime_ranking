@@ -34,7 +34,8 @@ Route::get('/anime/{id}', [AnimeController::class, 'getSpecificAnime']);
 
 // routes liées aux watchlists
 Route::get('/watchlist', [WatchlistController::class, 'index']);
-Route::post('/anime/{id}/add_to_watch_list', [WatchlistController::class, 'addToWatchList']);
+Route::post('/watchlist/{id}/add', [WatchlistController::class, 'create']);
+Route::post('/watchlist/{id}/delete', [WatchlistController::class, 'delete']);
 
 // routes liées aux reviews
 Route::get('/anime/{id}/new_review', [ReviewController::class, 'newReview']);

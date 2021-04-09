@@ -25,21 +25,37 @@ class WatchlistController extends Controller
     }
 
     // ajout d'un anime dans une playlist
-    public function addToWatchList ($animeId) {
+    public function create ($animeId) {
         // si l'utilisateur est connecté
         if (Auth::check()) {
-            // création de la playlist
-            $watchlist = new Watchlist();
-            $watchlist->user_id = Auth::id();
-            $watchlist->anime_id = $animeId;
-            $watchlist->save();
+            $animeAlreadyAdded = DB::table('watchlists')->where('user_id', Auth::id())->where('anime_id', $animeId)->exists();
+            
+            // si l'anime ne fait pas déjà partie de la playlist, on l'ajoute
+            if (!$animeAlreadyAdded) {
+                $watchlist = new Watchlist();
+                $watchlist->user_id = Auth::id();
+                $watchlist->anime_id = $animeId;
+                $watchlist->save();
 
-            // redirige vers la playlist
-            return redirect ('/watchlist');
+                // redirige vers la playlist
+                return redirect ('/watchlist');
+            }
+
+            // sinon, revient en arrière
+            return back();
         }
 
         // si l'utilisateur n'est pas connecté, redirige vers la page de connexion
         return redirect('/login');
+    }
+
+    // suppression d'une watchlist
+    public function delete ($animeId) {
+        if (Auth::check()) {
+            $watchlist = Watchlist::where('user_id', Auth::id())->where('anime_id', $animeId)->get()->first();
+            if ($watchlist->exists()) $watchlist->delete();          
+            return back();
+        }
     }
 
     

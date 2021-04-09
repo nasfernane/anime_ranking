@@ -20,8 +20,11 @@
                 <img alt="" src="/covers/{{ $anime->cover }}" />
             </div>
             <div class="anime__header--title">
-                <h1>{{ $anime->title }}</h1>
-                <p>Note moyenne des utilisateurs: <strong class="animeRank"><span class="animeRank__note animeRank__note--{{ $color }}">{{ $anime->avgRank }}</span> / 10</strong></p>
+                <h1>
+                    {{ $anime->title }}
+                    @include ('components.avg_rank')
+                </h1>
+                {{-- <p>Note moyenne des utilisateurs: <strong class="animeRank"><span class="animeRank__note animeRank__note--{{ $color }}">{{ $anime->avgRank }}</span> / 10</strong></p> --}}
             </div>
             
         </header>
@@ -40,7 +43,7 @@
                         <a class="cta" href="/anime/{{ $anime->id }}/new_review">Ajouter une review</a>
                     </div>
                 @endif  
-                <form action="/anime/{{ $anime->id }}/add_to_watch_list" method="POST">
+                <form action="/watchlist/{{ $anime->id }}/add" method="POST">
                     @csrf
                     <button class="cta">Ajouter à ma watchlist</button>
                 </form>

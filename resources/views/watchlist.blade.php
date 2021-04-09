@@ -1,21 +1,39 @@
 <x-layout>
-    <x-slot name="title">
-        Watchlist
-    </x-slot>
+    
+  <ul role="list" class="top-list">
     <h1>Ma watchlist</h1>
-    <ul role="list" class="anime-list">
-        @foreach($watchlist as $anime)
-            <li class="flow">
-                <div class="flow">
-                <div>
-                    <img alt="" src="/covers/{{ $anime->cover }}" />
-                </div>
-                <h2>
-                    {{ $anime->title }}
+    @foreach($watchlist as $anime)
+        <?php
+            $color = '';
+            if ($anime->avgRank > 6) {
+                $color = 'green';
+            } else if ($anime->avgRank > 4) {
+                $color = 'white';
+            } else {
+                $color = 'red';
+            }
+        ?>
+        <li class="top-list__anime">
+            <div class="top-list__anime__img">
+                <img alt="{{ $anime->title }}" src="/covers/{{ $anime->cover }}" />
+            </div>
+            
+            <div class="top-list__anime__content">
+                <h2> #{{ $loop->index + 1 }} {{ $anime->title }} 
+                    <strong class="animeRank">
+                        <span class="animeRank__note animeRank__note--{{ $color }}">{{ $anime->avgRank }}</span>&nbsp;/&nbsp;10  
+                    </strong>
                 </h2>
-                </div>
-                <a class="cta" href="/anime/{{ $anime->id }}">Voir</a>
-            </li>
-        @endforeach
-    </ul>
+                <p>{{ $anime->description }}</p>
+                <div class="top-list__anime__content--actions">
+                    <a class="cta" href="/anime/{{ $anime->id }}">Reviews</a>
+                    <form action="/watchlist/{{ $anime->id }}/delete" method="POST">
+                    @csrf
+                    <button class="cta">Supprimer de ma watchlist</button>
+                </form>
+                </div>       
+            </div>       
+        </li>
+    @endforeach
+  </ul>
 </x-layout>

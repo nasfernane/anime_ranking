@@ -64,28 +64,17 @@ article > * + * {
     align-items: center;
     justify-content: flex-start;
 
-    // &--title {
-    //     p {
-    //         // .animeRank {
-    //         //     font-size: 1.4rem;
-    //         //     font-weight: bold;
-    //         //     padding: 0.3rem 0.6rem;
-    //         //     background-color: #ccc;
+    &--title {
+        h1 {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
 
-    //         //     &__note {
-    //         //         color: white;
-
-    //         //         &--green {
-    //         //             color: green;
-    //         //         }
-
-    //         //         &--red {
-    //         //             color: red;
-    //         //         }
-    //         //     }
-    //         // }
-    //     }
-    // }
+            strong {
+                margin-left: 3rem;
+            }
+        }
+    }
 }
 
 article.anime {

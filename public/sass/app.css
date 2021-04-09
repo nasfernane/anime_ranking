@@ -104,20 +104,105 @@ h2 {
       height: auto;
       text-indent: 0; }
 
-.animeRank {
+.animeRank__note {
+  color: black;
   font-size: 1.4rem;
-  font-weight: bold;
   padding: 0.3rem 0.6rem;
+  font-weight: bold;
   background-color: #ccc; }
-  .animeRank__note {
+  .animeRank__note--green {
+    color: green; }
+  .animeRank__note--red {
+    color: red; }
+  .animeRank__note--white {
     color: white; }
-    .animeRank__note--green {
-      color: green; }
-    .animeRank__note--red {
-      color: red; }
+
+[data-tooltip] {
+  position: relative;
+  z-index: 10; }
+
+/* Positioning and visibility settings of the tooltip */
+[data-tooltip]:before,
+[data-tooltip]:after {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  left: 50%;
+  bottom: calc(100% + 5px);
+  /* 5px is the size of the arrow */
+  pointer-events: none;
+  transition: 0.2s;
+  will-change: transform; }
+
+/* The actual tooltip with a dynamic width */
+[data-tooltip]:before {
+  content: attr(data-tooltip);
+  padding: 10px 18px;
+  min-width: 50px;
+  max-width: 300px;
+  width: max-content;
+  width: -moz-max-content;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: rgba(59, 72, 80, 0.9);
+  background-image: linear-gradient(30deg, rgba(59, 72, 80, 0.44), rgba(59, 68, 75, 0.44), rgba(60, 82, 88, 0.44));
+  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-align: center;
+  white-space: pre-wrap;
+  transform: translate(-50%, -5px) scale(0.5); }
+
+/* Tooltip arrow */
+[data-tooltip]:after {
+  content: "";
+  border-style: solid;
+  border-width: 5px 5px 0px 5px;
+  /* CSS triangle */
+  border-color: rgba(55, 64, 70, 0.9) transparent transparent transparent;
+  transition-duration: 0s;
+  /* If the mouse leaves the element, 
+                                the transition effects for the 
+                                tooltip arrow are "turned off" */
+  transform-origin: top;
+  /* Orientation setting for the
+                                slide-down effect */
+  transform: translateX(-50%) scaleY(0); }
+
+/* Tooltip becomes visible at hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  visibility: visible;
+  opacity: 1; }
+
+/* Scales from 0.5 to 1 -> grow effect */
+[data-tooltip]:hover:before {
+  transition-delay: 0.3s;
+  transform: translate(-50%, -5px) scale(1); }
+
+[data-tooltip]:hover:after {
+  transition-delay: 0.5s;
+  /* Starting after the grow effect */
+  transition-duration: 0.2s;
+  transform: translateX(-50%) scaleY(1); }
+
+[data-tooltip-location="bottom"]:before,
+[data-tooltip-location="bottom"]:after {
+  top: calc(100% + 5px);
+  bottom: auto; }
+
+[data-tooltip-location="bottom"]:before {
+  transform: translate(-50%, 5px) scale(0.5); }
+
+[data-tooltip-location="bottom"]:hover:before {
+  transform: translate(-50%, 5px) scale(1); }
+
+[data-tooltip-location="bottom"]:after {
+  border-width: 0px 5px 5px 5px;
+  border-color: transparent transparent rgba(55, 64, 70, 0.9) transparent;
+  transform-origin: bottom; }
 
 main {
-  max-width: 40%;
+  max-width: 50%;
   margin: 5rem auto;
   padding: 1rem; }
 
@@ -236,6 +321,12 @@ article > * + * {
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start; }
+  .anime__header--title h1 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; }
+    .anime__header--title h1 strong {
+      margin-left: 3rem; }
 
 article.anime {
   max-width: 100%;
@@ -271,48 +362,48 @@ section.reviewsContainer .otherReviews__review {
 
 .top-list {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  align-items: center; }
+  .top-list h1 {
+    margin-bottom: 3rem; }
   .top-list__anime {
     width: 100%;
     padding: 2rem;
-    outline: 0.2rem dotted;
     box-sizing: content-box;
     display: flex;
-    flex-direction: row;
-    margin-bottom: 3rem; }
+    flex-direction: row !important;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    background: #eef; }
     .top-list__anime__img {
       width: 40%; }
+      .top-list__anime__img img {
+        border: 4px solid; }
     .top-list__anime__content {
-      width: 40%;
+      width: 55%;
       display: flex;
-      flex-direction: column; }
+      flex-direction: column;
+      justify-content: space-between; }
       .top-list__anime__content h2 {
+        font-size: 2rem;
         display: block;
         width: auto;
-        border: 1px solid black; }
-      .top-list__anime__content .animeRank {
-        width: 30%; }
-
-.top-list li {
-  padding: 2rem;
-  outline: 0.2rem dotted;
-  box-sizing: content-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; }
-
-.top-list img {
-  border: 4px solid; }
-
-.top-list h2 {
-  font-size: 1.1rem; }
-
-.anime .actions {
-  display: flex;
-  margin: -1rem; }
-
-.anime .actions > * {
-  margin: 1rem; }
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+      .top-list__anime__content p {
+        font-style: italic;
+        text-align: justify;
+        font-size: 1.6rem; }
+      .top-list__anime__content--actions {
+        margin: 0 auto;
+        width: 70%; }
+        .top-list__anime__content--actions a,
+        .top-list__anime__content--actions form button {
+          width: 100%;
+          font-weight: bold;
+          margin-bottom: 1rem; }
 
 .cta {
   cursor: pointer;
@@ -328,16 +419,6 @@ section.reviewsContainer .otherReviews__review {
 
 article > * + * {
   margin-top: 4rem; }
-
-.anime h1 {
-  font-size: 2.5rem;
-  line-height: 1.2; }
-
-.anime img {
-  border: 2px solid;
-  max-width: 10rem;
-  margin-right: 4rem;
-  box-shadow: 0.25rem 0.25rem 0 black; }
 
 .anime__header {
   display: flex;

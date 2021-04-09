@@ -1,61 +1,65 @@
 .top-list {
     display: flex;
     flex-direction: column;
+    align-items: center;
+
+    h1 {
+        margin-bottom: 3rem;
+    }
 
     &__anime {
         width: 100%;
         padding: 2rem;
-        outline: 0.2rem dotted;
         box-sizing: content-box;
         display: flex;
-        flex-direction: row;
+        flex-direction: row !important;
+        justify-content: space-between;
         margin-bottom: 3rem;
+        background: #eef;
 
         &__img {
             width: 40%;
+
+            img {
+                border: 4px solid;
+            }
         }
 
         &__content {
-            width: 40%;
+            width: 55%;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
 
             h2 {
+                font-size: 2rem;
                 display: block;
                 width: auto;
-                border: 1px solid black;
+                margin-bottom: 1rem;
+                display: flex;
+                justify-content: space-between;
+                // flex-wrap: wrap;
+                align-items: center;
             }
 
-            .animeRank {
-                width: 30%;
+            p {
+                font-style: italic;
+                text-align: justify;
+                font-size: 1.6rem;
+            }
+
+            &--actions {
+                margin: 0 auto;
+                width: 70%;
+                a,
+                form button {
+                    width: 100%;
+                    font-weight: bold;
+                    margin-bottom: 1rem;
+                }
             }
         }
     }
-}
-
-.top-list li {
-    padding: 2rem;
-    outline: 0.2rem dotted;
-    box-sizing: content-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.top-list img {
-    border: 4px solid;
-}
-
-.top-list h2 {
-    font-size: 1.1rem;
-}
-
-.anime .actions {
-    display: flex;
-    margin: -1rem;
-}
-.anime .actions > * {
-    margin: 1rem;
 }
 
 .cta {
@@ -73,18 +77,6 @@
 
 article > * + * {
     margin-top: 4rem;
-}
-
-.anime h1 {
-    font-size: 2.5rem;
-    line-height: 1.2;
-}
-
-.anime img {
-    border: 2px solid;
-    max-width: 10rem;
-    margin-right: 4rem;
-    box-shadow: 0.25rem 0.25rem 0 black;
 }
 
 .anime__header {

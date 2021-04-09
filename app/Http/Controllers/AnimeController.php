@@ -21,10 +21,31 @@ class AnimeController extends Controller
         }
     }
 
+    // ajoute vision globale des notes à une collection d'animes
+    public function addOverallRanks ($animes) {
+        foreach ($animes as $anime) {
+            $overallRanks = [];
+            $reviews = DB::table('reviews')->where('anime_id', $anime->id)->get()->groupBy('note');
+            foreach ($reviews as $review) {
+                $overallRanks[$review->first()->note] = $review->count();
+            }
+            // trie le tableau par ordre numérique naturel
+            ksort($overallRanks, SORT_NATURAL);
+            // ajoute le tableau à chaque anime
+            $anime->overallRanks = $overallRanks;
+        }
+
+        // retourne la collection
+        return $animes;
+    }
+
     // affichage des animes selon leur note moyenne
     public function displayTopAnimes () {
         // récupère tous les animes triés par note moyenne en ordre décroissant
         $animes = DB::table('animes')->orderBy('avgRank', 'desc')->get();
+        
+        // ajoute le détail des notes
+        $animes = $this->addOverallRanks($animes);
         return view('top', ['animes' => $animes]);
     }
 
