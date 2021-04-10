@@ -258,7 +258,7 @@ input {
 
 header {
   background: white;
-  height: 6vh;
+  height: 8vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -274,6 +274,7 @@ header.topnav {
   border-bottom: 1px solid #ccc; }
 
 .logo {
+  font-size: 1.6rem;
   text-decoration: none;
   color: inherit;
   font-family: "Poppins", sans-serif; }
@@ -281,7 +282,8 @@ header.topnav {
 nav {
   display: flex;
   flex-wrap: wrap;
-  align-items: center; }
+  align-items: center;
+  font-size: 1.4rem; }
 
 nav > * {
   margin: 1rem; }
@@ -289,6 +291,8 @@ nav > * {
 nav a {
   color: inherit;
   text-decoration: none; }
+  nav a:hover {
+    text-decoration: underline; }
 
 nav button {
   background: none;

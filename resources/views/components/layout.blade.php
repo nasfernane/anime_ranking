@@ -12,9 +12,9 @@
     <header class="topnav"> 
       <div class="inner">
         <nav>
-            <a class="logo" href="/">Anime Ranking</a>
-          <a href="/animes/top">Top</a>
-          <a href="/watchlist/index">Ma watchlist</a>
+            <a class="logo" href="/">AniManiacs</a>
+            <a href="/animes/top">Le top</a>
+            <a href="/watchlist/index">Ma watchlist</a>
         </nav>
         <nav>
           @auth
