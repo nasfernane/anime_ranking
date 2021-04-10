@@ -42,7 +42,7 @@
                         <a class="cta" href="/review/{{ $anime->id }}/create">Ajouter une review</a>
                     </div>
                 @endif  
-                <form action="/watchlist/{{ $anime->id }}/store" method="POST">
+                <form action="{{ route('watchlist.store', ['id' => $anime->id]) }}" method="POST">
                     @csrf
                     <button class="cta">Ajouter à ma watchlist</button>
                 </form>
@@ -59,6 +59,7 @@
                     <span class="userReview__content">{{ $userReview->content }}</span> 
                     <div class="userReview__actions">
                         <form action="/review/{{ $userReview->id }}/edit" method="POST">
+                        {{-- <form action="{{ route('review.edit', ['id' => $userReview->id]) }}" method="POST"> --}}
                             @csrf
                             <button class="cta">Modifier ma review</button>
                         </form>

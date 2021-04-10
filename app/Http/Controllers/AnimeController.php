@@ -9,6 +9,7 @@ use PhpParser\Node\Expr\Cast\Object_;
 use SebastianBergmann\Type\NullType;
 
 use App\Models\Anime;
+use App\Models\Review;
 
 class AnimeController extends Controller
 {
@@ -59,44 +60,38 @@ class AnimeController extends Controller
 
     // affichage d'un anime
     public function show ($id) {
-        // récupère l'anime selon l'id entré en paramètre dans l'url, avec les reviews qui lui sont associées
-        $animeReviews = Anime::where('animes.id', $id)->leftjoin('reviews', 'reviews.anime_id', '=', 'animes.id')->get();
-        $anime = $animeReviews->first();
-        $anime->id = $anime->anime_id;
-        
+        // récupère l'anime et ridirige si il n'existe pas
+        $anime = Anime::find($id);
+        if (!$anime) return redirect ('/');
+
         // ajoute l'overview des notes sur l'anime
         $anime = $this->addOverallRanks($anime);
+        // récupère ses reviews
+        $reviews = Review::where('anime_id', $anime->id)->get();  
 
-        // si on obtient au moins un résultat
-        if (isset($animeReviews[0])) {
-            // si l'anime dispose d'au moins une review
-            if ($animeReviews[0]->content !== Null) {
-                // pour chaque review
-                foreach ($animeReviews as $key => $review) {
-                    // si elle appartient à l'utilisateur connecté
-                    if ($review->user_id === Auth::id()) {
-                        // sépare la review de l'utilisateur des autres
-                        $userReview = $review;
-                        unset($reviews[$key]);
-
-                        // et on retourne la vue avec les reviews des autres utilisateurs, la review de l'utilisateur connecté et les informations sur l'anime
-                        return view('anime', ["reviews" => $animeReviews, "userReview" => $userReview, "anime" => $anime]);
-                    }
-                }
-                
-                // si aucune review n'appartient à l'utilisateur, on renvoie les informations sur l'anime et toutes les reviews
-                
-                return view('anime', ["reviews" => $animeReviews, "anime" => $anime]);
-            }
-
-            // si l'anime ne dispose pas de review, on renvoie seulement les informations sur l'anime
-            $anime['id'] = $id;
-            return view('anime', ["anime" => $anime]);
-            
-        }
-        // si l'id ne correspond à aucun anime, on renvoie vers la page d'accueuil
-        return redirect ('/');
         
+        // si l'anime dispose d'au moins une review
+        if (isset($reviews[0]) && $reviews[0]->content !== Null) {
+            // pour chaque review
+            foreach ($reviews as $key => $review) {
+                // si elle appartient à l'utilisateur connecté
+                if ($review->user_id === Auth::id()) {
+                    // sépare la review de l'utilisateur des autres
+                    $userReview = $review;
+                    unset($reviews[$key]);
+
+                    // et on retourne la vue avec les reviews des autres utilisateurs, la review de l'utilisateur connecté et les informations sur l'anime
+                    return view('anime', ["reviews" => $reviews, "userReview" => $userReview, "anime" => $anime]);
+                }
+            }
+            
+            // si aucune review n'appartient à l'utilisateur, on renvoie les informations sur l'anime et toutes les reviews
+            return view('anime', ["reviews" => $reviews, "anime" => $anime]);
+        }
+
+        // si l'anime ne dispose pas de review, on renvoie seulement les informations sur l'anime
+        return view('anime', ["anime" => $anime]);
+            
     }
 
 }

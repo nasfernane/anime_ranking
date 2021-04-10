@@ -55,14 +55,24 @@ class ReviewController extends Controller
     
     public function store(StoreReview $request, int $animeId)
     {
-        // création d'une review avec mass assignement et validation des saisies utilisateurs
-        Review::make($request->validated())->fill(['anime_id' => $animeId, 'user_id' => Auth::id(), 'user_name' => Auth::user()->username])->save();
+        // vérifie si l'utilisateur a déjà créé une review pour cet anime
+        $reviewExists = Review::where('anime_id', $animeId)->where('user_id', Auth::id())->exists();
+        
+        // si ce n'est pas le cas, on la crée
+        if (!$reviewExists) {
+            // création d'une review avec mass assignement et validation des saisies utilisateurs
+            Review::make($request->validated())->fill(['anime_id' => $animeId, 'user_id' => Auth::id(), 'user_name' => Auth::user()->username])->save();
 
-        // maj note moyenne sur l'anime
-        AnimeController::updateAvgRank($animeId);
+            // maj note moyenne sur l'anime
+            AnimeController::updateAvgRank($animeId);
 
-        // redirige vers la page de l'anime
-        return redirect("/animes/$animeId");
+            // redirige vers la page de l'anime
+            return redirect("/animes/$animeId");
+        }
+
+        // sinon, on redirige vers l'anime
+        return redirect (route('anime.show', ['id' => $animeId]));
+        
     }
 
     
@@ -112,7 +122,6 @@ class ReviewController extends Controller
     {
         // récupération de la review
         $review = Review::find($id);
-        // dd($review);
         // si la review appartient à l'utilisateur connecté
         if ($review->user_id === Auth::id()) {
             // supprime la review et revient sur la page de l'anime 
