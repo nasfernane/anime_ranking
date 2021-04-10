@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Anime;
+
 class AnimeSeeder extends Seeder
 {
     /**
@@ -54,11 +56,10 @@ class AnimeSeeder extends Seeder
         ];
 
         foreach ($animes as $anime) {
-            DB::table('animes')->insert([
-                'title' => $anime['title'],
-                'description' => $anime['description'],
-                'cover' => $anime['cover']
-            ]);
+            $currentAnime = new Anime();
+
+            $currentAnime->fill(['title' => $anime['title'], 'description' => $anime['description'],
+            'cover' => $anime['cover']])->save();
         }
     }
 }

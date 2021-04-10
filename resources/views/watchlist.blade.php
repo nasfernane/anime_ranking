@@ -2,6 +2,9 @@
     
   <ul role="list" class="top-list">
     <h1>Ma watchlist</h1>
+    @unless (isset($watchlist[0]))
+        <h2>Vous n'avez pas encore ajouté d'anime à votre watchlist</h2>
+    @endunless
     @foreach($watchlist as $anime)
         <?php
             $color = '';
@@ -19,11 +22,17 @@
             </div>
             
             <div class="top-list__anime__content">
-                <h2> #{{ $loop->index + 1 }} {{ $anime->title }} 
-                    <strong class="animeRank">
-                        <span class="animeRank__note animeRank__note--{{ $color }}">{{ $anime->avgRank }}</span>&nbsp;/&nbsp;10  
-                    </strong>
-                </h2>
+                {{-- <h2> #{{ $loop->index + 1 }} {{ $anime->title }} 
+                    @include ('components.avg_rank')
+                </h2> --}}
+                <div class="top-list__anime__content--header">
+                    <h2>{{ $anime->title }}</h2> 
+                    <div class="top-list__anime__content--header__rank">
+                        @include ('components.avg_rank')
+                        <p>Ajouté le {{ $anime->created_at->format('d/m/Y') }}</p>
+                    </div>
+                    
+                </div>
                 <p>{{ $anime->description }}</p>
                 <div class="top-list__anime__content--actions">
                     <a class="cta" href="/animes/{{ $anime->id }}">Reviews</a>

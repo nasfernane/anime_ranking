@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\StoreWatchlist;
+use App\Http\Controllers\AnimeController;
 
 use App\Models\Watchlist;
+use Illuminate\Database\DBAL\TimestampType;
 
 class WatchlistController extends Controller
 {
@@ -19,7 +21,13 @@ class WatchlistController extends Controller
         // si l'utilisateur est connecté
         if (Auth::check()) {
             // récupère sa watchlist
-            $watchlist = DB::table('watchlists')->where('user_id', Auth::id())->leftjoin('animes', 'animes.id', '=', 'watchlists.anime_id')->get();
+            $watchlist = Watchlist::where('user_id', Auth::id())->rightjoin('animes', 'animes.id', '=', 'watchlists.anime_id')->select('watchlists.id as watchlist_id', 'animes.*', 'watchlists.created_at')->get();
+
+            // ajoute le détail des notes sur chaque anime
+            foreach ($watchlist as $anime) {
+                $anime = AnimeController::addOverallRanks($anime);               
+            }
+            
             // retourne la vue
             return view('watchlist', ['watchlist' => $watchlist]);
 

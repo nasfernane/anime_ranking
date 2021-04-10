@@ -2,6 +2,7 @@
   <x-slot name="title">
     Nouveau compte
   </x-slot>
+  <div class="auth-background"></div>
   <div class="signup">
     <div>
       <h1>Nouveau Compte</h1>

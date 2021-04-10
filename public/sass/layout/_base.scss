@@ -34,3 +34,25 @@ input {
     display: grid;
     place-items: center;
 }
+
+.auth-background {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -999;
+    background-image: url("/img/authbackground.jpg");
+    background-size: cover;
+}
+
+.background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -999;
+    background-image: url("/img/totoro_background.jpg");
+    background-size: cover;
+}

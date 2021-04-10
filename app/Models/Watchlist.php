@@ -13,4 +13,6 @@ class Watchlist extends Model
         'user_id',
         'anime_id',
     ];
+
+    protected $dates = ['created_at'];
 }

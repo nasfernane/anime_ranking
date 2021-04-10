@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 use App\Http\Controllers\AnimeController;
 
-use App\Models\User;
+use App\Models\Review;
 use Database\Seeders\Spintax;
 // use Faker;
 
@@ -63,14 +63,15 @@ class ReviewSeeder extends Seeder
 
                 }
                 
+                $currentReview = new Review();
 
-                DB::table('reviews')->insert([
+                $currentReview->fill([
                     'content' => $randomReview,
                     'anime_id' => $i,
                     'user_id' => $key + 1,
                     'user_name' => $user->username,
                     'note' => $note
-                ]);
+                ])->save();
             }
         }
 

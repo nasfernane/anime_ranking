@@ -2,6 +2,7 @@
   <x-slot name="title">
     Connexion
   </x-slot>
+  <div class="auth-background"></div>
   <div class="login">
     <div>
       <h1>Connexion</h1>
@@ -9,7 +10,7 @@
         @csrf
         <div class="input-group">
           <label for="username">Nom d'utilisateur</label>
-          <input id="username" name="username" value="{{ old('username') }}" required />
+          <input id="username" name="username" value="{{ old('username') }}" required autocomplete="off" />
           @error('username')
             <p class="error">{{ $message }}</p>
           @enderror

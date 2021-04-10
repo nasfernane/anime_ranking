@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="/sass/app.css" />
   </head>
   <body>
-    <header class="topnav">
+    <header class="topnav"> 
       <div class="inner">
         <nav>
-          <a class="logo" href="/">Anime Ranking</a>
+            <a class="logo" href="/">Anime Ranking</a>
           <a href="/animes/top">Top</a>
           <a href="/watchlist/index">Ma watchlist</a>
         </nav>
@@ -32,6 +32,7 @@
       </div>
     </header>
     <main>
+        <div class="background"></div>
       {{ $slot }}
     </main>
   </body>

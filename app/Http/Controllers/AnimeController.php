@@ -24,7 +24,7 @@ class AnimeController extends Controller
     }
 
     // ajoute vision globale des notes à un anime
-    public function addOverallRanks ($anime) {
+    static function addOverallRanks ($anime) {
             $overallRanks = [];
             $reviews = DB::table('reviews')->where('anime_id', $anime->id)->get()->groupBy('note');
             foreach ($reviews as $review) {

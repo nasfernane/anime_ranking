@@ -15,7 +15,9 @@
         flex-direction: row !important;
         justify-content: space-between;
         margin-bottom: 3rem;
-        background: #eef;
+        background: $trans-background;
+        border: 0.1rem solid $color-font;
+        border-radius: 0.8rem;
 
         &__img {
             width: 40%;
@@ -71,7 +73,7 @@
     display: inline-block;
     padding: 0.5rem 1rem;
     color: inherit;
-    box-shadow: 0.25rem 0.25rem 0 black;
+    box-shadow: 0.25rem 0.25rem 0 $color-font;
     background: white;
 }
 

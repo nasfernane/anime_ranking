@@ -13,41 +13,36 @@
     <x-slot name="title">
         {{ $anime->title }}
     </x-slot>
-
-    <article class="anime">
-        <header class="anime__header">
-            <div class="anime__header--cover">
-                <img alt="" src="/covers/{{ $anime->cover }}" />
-            </div>
-            <div class="anime__header--title">
-                <h1>
-                    {{ $anime->title }}
-                    @include ('components.avg_rank')
-                </h1>
+    
+    <div class="animeContainer">
+        <div class="top-list__anime">
+            <div class="top-list__anime__img">
+                <img alt="{{ $anime->title }}" src="/covers/{{ $anime->cover }}" />
             </div>
             
-        </header>
-
-        <section class="descriptionContainer">
-            <p>{{ $anime->description }}</p>
-        </section>
-
-        <section class="actionsContainer">
-            @error('reviewconnexion')
-                <p>Vous devez être connecté pour ajouter une critique <a href="/login"> Se connecter</a></p>
-            @enderror
-            <div class="actions">
-                @if (!isset($userReview))                   
-                    <div>
-                        <a class="cta" href="/review/{{ $anime->id }}/create">Ajouter une review</a>
-                    </div>
-                @endif  
-                <form action="{{ route('watchlist.store', ['id' => $anime->id]) }}" method="POST">
-                    @csrf
-                    <button class="cta">Ajouter à ma watchlist</button>
-                </form>
-            </div>
-        </section>
+            <div class="top-list__anime__content">
+                <div class="top-list__anime__content--header">
+                    <h2> {{ $anime->title }}</h2> 
+                    @include ('components.avg_rank')
+                </div>
+                        
+                <p>{{ $anime->description }}</p>
+                <div class="top-list__anime__content--actions">
+                    @if (!isset($userReview))
+                        <a class="cta" href="{{ route('review.create', ['id' => $anime->id]) }}">Ajouter une review</a>
+                    @else 
+                        <form action="{{ route('review.edit', ['id' => $userReview->id]) }}" method="POST">
+                            @csrf
+                            <button class="cta">Modifier ma review</button>
+                        </form>
+                    @endif
+                    <form action="{{ route('watchlist.store', ['id' => $anime->id]) }}" method="POST">
+                        @csrf
+                        <button class="cta">Ajouter à ma watchlist</button>
+                    </form>
+                </div>       
+            </div>             
+        </div>
 
         <section class="reviewsContainer">
             @isset($userReview)
@@ -59,7 +54,6 @@
                     <span class="userReview__content">{{ $userReview->content }}</span> 
                     <div class="userReview__actions">
                         <form action="/review/{{ $userReview->id }}/edit" method="POST">
-                        {{-- <form action="{{ route('review.edit', ['id' => $userReview->id]) }}" method="POST"> --}}
                             @csrf
                             <button class="cta">Modifier ma review</button>
                         </form>
@@ -84,5 +78,6 @@
                 </div> 
             @endisset
         </section>
-  </article>
+    </div>
+   
 </x-layout>

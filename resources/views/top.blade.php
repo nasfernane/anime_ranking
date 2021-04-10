@@ -19,13 +19,16 @@
             </div>
             
             <div class="top-list__anime__content">
-                <h2> #{{ $loop->index + 1 }} {{ $anime->title }} 
+                <div class="top-list__anime__content--header">
+                    <h2> #{{ $loop->index + 1 }} {{ $anime->title }}</h2> 
                     @include ('components.avg_rank')
-                </h2>
+                </div>
+                
+                
                 <p>{{ $anime->description }}</p>
                 <div class="top-list__anime__content--actions">
                     <a class="cta" href="/animes/{{ $anime->id }}">Reviews</a>
-                    <form action="/watchlist/{{ $anime->id }}/add" method="POST">
+                    <form action="{{ route('watchlist.store', ['id' => $anime->id]) }}" method="POST">
                         @csrf
                         <button class="cta">Ajouter à ma watchlist</button>
                     </form>

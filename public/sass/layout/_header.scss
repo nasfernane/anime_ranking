@@ -1,14 +1,22 @@
-header.topnav {
-    border-bottom: 1px solid #ccc;
+header {
+    background: white;
+    height: 6vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: $trans-background;
+
+    .inner {
+        padding: 1rem 3rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
-header.topnav .inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 110ch;
-    margin: 0 auto;
+header.topnav {
+    border-bottom: 1px solid #ccc;
 }
 
 .logo {
