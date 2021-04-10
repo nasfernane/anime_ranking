@@ -16,15 +16,6 @@
                         
                 <p>{{ $anime->description }}</p>
                 <div class="top-list__anime__content--actions">
-                    {{-- @if (!isset($userReview))
-                        <a class="cta" href="{{ route('review.create', ['id' => $anime->id]) }}">Ajouter une review</a>
-                    @else 
-                        <a class="cta" href="{{ route('review.edit', ['id' => $userReview->id]) }}">Ajouter une review</a>
-                    @endif
-                    <form action="{{ route('watchlist.store', ['id' => $anime->id]) }}" method="POST">
-                        @csrf
-                        <button class="cta">Ajouter à ma watchlist</button>
-                    </form> --}}
                     <form action="/review/{{ $anime->id }}/store" method="POST">
                         @csrf
                         <div class="input-group input__group--range">
@@ -47,12 +38,14 @@
                         
                         <div class="input-group">
                             <label for="content">Votre critique</label>
-                            <input type="text" id="content" name="content" required value="{{ old('content') }}"/>
+                            <textarea type="text" id="content" name="content" required ">{{ old('content') }}</textarea>
+                            @error('content')
+                            <p class="error">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <button class="cta">Ajouter</button>
-                </div>       
-            </div>             
+                </div>                      
         </div>     
     </div>
 

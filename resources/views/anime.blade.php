@@ -30,11 +30,6 @@
                 <div class="top-list__anime__content--actions">
                     @if (!isset($userReview))
                         <a class="cta" href="{{ route('review.create', ['id' => $anime->id]) }}">Ajouter une review</a>
-                    @else 
-                        <form action="{{ route('review.edit', ['id' => $userReview->id]) }}" method="POST">
-                            @csrf
-                            <button class="cta">Modifier ma review</button>
-                        </form>
                     @endif
                     <form action="{{ route('watchlist.store', ['id' => $anime->id]) }}" method="POST">
                         @csrf

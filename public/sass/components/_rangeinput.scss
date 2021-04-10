@@ -1,53 +1,64 @@
-.anime {
-    .actions {
-        form {
-            .input__group--range {
-                width: 600px;
-                input {
-                    padding: 0;
-                    border: 0;
-                    width: 100%;
-                    -webkit-appearance: none;
+.animeContainer {
+    .top-list__anime {
+        &__content {
+            &--actions {
+                form {
+                    .input__group--range {
+                        width: 100%;
+                        input {
+                            padding: 0;
+                            border: 0;
+                            width: 100%;
+                            -webkit-appearance: none;
 
-                    &::-webkit-slider-runnable-track {
-                        background: #ccc;
+                            &::-webkit-slider-runnable-track {
+                                background: #ccc;
+                            }
+
+                            &::-moz-range-thumb {
+                                background: #ccc;
+                            }
+
+                            &::-ms-track {
+                                background: transparent;
+                            }
+
+                            &::-ms-fill-lower {
+                                background: #e1e1e1;
+                                border-radius: 10px;
+                            }
+                            &::-ms-fill-upper {
+                                background: #eee;
+                            }
+
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+
+                        .range__list {
+                            display: flex;
+                            justify-content: space-between;
+                            height: auto;
+                            // overflow: hidden;
+                            margin-top: 16px;
+                            width: 100%;
+                            padding: 0.3rem;
+
+                            option {
+                                display: block;
+                                width: 0;
+                                height: auto;
+                                text-indent: 0;
+                            }
+                        }
                     }
 
-                    &::-moz-range-thumb {
-                        background: #ccc;
-                    }
-
-                    &::-ms-track {
-                        background: transparent;
-                    }
-
-                    &::-ms-fill-lower {
-                        background: #e1e1e1;
-                        border-radius: 10px;
-                    }
-                    &::-ms-fill-upper {
-                        background: #eee;
-                    }
-
-                    &:focus {
-                        outline: none;
-                    }
-                }
-
-                .range__list {
-                    display: flex;
-                    justify-content: space-between;
-                    height: auto;
-                    // overflow: hidden;
-                    margin-top: 16px;
-                    width: 100%;
-                    padding: 0.3rem;
-
-                    option {
-                        display: block;
-                        width: 0;
-                        height: auto;
-                        text-indent: 0;
+                    .input-group {
+                        textarea {
+                            padding: 0.5rem 1rem;
+                            width: 100%;
+                        }
                     }
                 }
             }
