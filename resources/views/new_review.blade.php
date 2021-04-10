@@ -18,7 +18,7 @@
             @csrf
             <div class="input-group input__group--range">
                 <label for="note">Votre note</label>
-                <input type="range" id="note" name="note" required min="0" max="10" step="1" list="notelist"/>
+                <input type="range" id="note" name="note" required min="0" max="10" step="1" list="notelist" value="{{ old('note') }}"/>
                 <datalist id="notelist" class="range__list">
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -34,12 +34,11 @@
                 </datalist>
             </div>
             
-
             <div class="input-group">
                 <label for="content">Votre critique</label>
-                <input type="text" id="content" name="content" required />
-                @error('username')
-                <p class="error">{{ $message }}</p>
+                <input type="text" id="content" name="content" required value="{{ old('content') }}"/>
+                @error('content')
+                    <p class="error">{{ $message }}</p>
                 @enderror
             </div>
 

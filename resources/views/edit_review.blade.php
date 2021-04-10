@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        Nouvelle critique de {{ $anime->title }}
+        MOdification review de {{ $anime->title }}
     </x-slot>
 
     <article class="anime">
@@ -36,8 +36,8 @@
                     <div class="input-group">
                         <label for="content">Votre critique</label>
                         <input type="text" id="content" name="content" required value="{{ $userReview->content }}"/>
-                        @error('username')
-                        <p class="error">{{ $message }}</p>
+                        @error('content')
+                            <p class="error">{{ $message }}</p>
                         @enderror
                     </div>
                     <button class="cta">Modifier</button>
