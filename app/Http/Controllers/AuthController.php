@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
+use App\Http\Requests\StoreUser;
+
 class AuthController extends Controller
 {
     public function logIn (Request $request) {
@@ -26,18 +28,14 @@ class AuthController extends Controller
           ]);
     }
 
-    public function signUp (Request $request) {
-        $validated = $request->validate([
-            "username" => "required",
-            "password" => "required",
-            "password_confirmation" => "required|same:password"
-          ]);
+    public function signUp (StoreUser $request) {
+        $validated = $request->validated();
 
           $user = new User();
           $user->username = $validated["username"];
           $user->password = Hash::make($validated["password"]);
-
           $user->save();
+
           Auth::login($user);
         
           return redirect('/');

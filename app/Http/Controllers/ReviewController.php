@@ -33,7 +33,8 @@ class ReviewController extends Controller
             // récupère l'anime concerné
             $anime = Anime::find($animeId);
             // vérifie si l'utilisateur a déjà soumis une review
-            $review = DB::table('reviews')->where(['user_id' => Auth::id(), 'anime_id' => $animeId])->get()->first();
+            $review = Review::where('user_id', Auth::id())->where('anime_id', $animeId);
+            // $review = DB::table('reviews')->where(['user_id' => Auth::id(), 'anime_id' => $animeId])->get()->first();
 
             // en l'absence de review appartenant à l'utilisateur
             if (!$review) {
@@ -54,17 +55,8 @@ class ReviewController extends Controller
     
     public function store(StoreReview $request, int $animeId)
     {
-        // vérification des données entrées en input
-        $validated = $request->validated();
-
-        // ajout d'une review sur la base du modèle
-        $review = new Review();
-        $review->content = $validated['content'];
-        $review->note = $validated['note'];
-        $review->anime_id = $animeId;
-        $review->user_id = Auth::id();
-        $review->user_name = Auth::user()->username;
-        $review->save();
+        // création d'une review avec mass assignement et validation des saisies utilisateurs
+        Review::make($request->validated)->fill(['anime_id' => $animeId, 'user_id' => Auth::id(), 'user_name' => Auth::user()->username])->save();
 
         // maj note moyenne sur l'anime
         AnimeController::updateAvgRank($animeId);

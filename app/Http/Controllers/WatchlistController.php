@@ -40,14 +40,12 @@ class WatchlistController extends Controller
     {
         // si l'utilisateur est connecté
         if (Auth::check()) {
-            $animeAlreadyAdded = DB::table('watchlists')->where('user_id', Auth::id())->where('anime_id', $animeId)->exists();
+            $animeAlreadyAdded = Watchlist::where('user_id', Auth::id())->where('anime_id', $animeId)->exists();
             
             // si l'anime ne fait pas déjà partie de la playlist, on l'ajoute
             if (!$animeAlreadyAdded) {
                 $watchlist = new Watchlist();
-                $watchlist->user_id = Auth::id();
-                $watchlist->anime_id = $animeId;
-                $watchlist->save();
+                $watchlist->fill(['user_id' => Auth::id(), 'anime_id' => $animeId])->save();
 
                 // redirige vers la playlist
                 return redirect ('/watchlist/index');
