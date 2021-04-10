@@ -17,6 +17,7 @@ class AnimeController extends Controller
         foreach ($animeIds as $id) {
             // mise à jour de la note moyenne d'un anime
             $avg_rank = DB::table('reviews')->where('anime_id', '=', $id)->get()->avg('note');
+            // dd($avg_rank);
             DB::table('animes')->where('id', $id)->update(['avgRank' => $avg_rank]);
         }
     }
@@ -46,32 +47,32 @@ class AnimeController extends Controller
     // affichage des animes selon leur note moyenne
     public function displayTop () {
         // récupère tous les animes triés par note moyenne en ordre décroissant
-        $animes = DB::table('animes')->orderBy('avgRank', 'desc')->get();
+        $animes = Anime::orderBy('avgRank', 'desc')->get();
 
         // ajoute le détail des notes sur chaque anime
         foreach ($animes as $anime) {
             $anime = $this->addOverallRanks($anime);
         }
         
-       
         return view('top', ['animes' => $animes]);
     }
 
     // affichage d'un anime
     public function show ($id) {
         // récupère l'anime selon l'id entré en paramètre dans l'url, avec les reviews qui lui sont associées
-        $reviews = DB::table('animes')->where('animes.id', $id)->leftjoin('reviews', 'reviews.anime_id', '=', 'animes.id')->get();
-        $anime = $reviews->first();
+        $animeReviews = Anime::where('animes.id', $id)->leftjoin('reviews', 'reviews.anime_id', '=', 'animes.id')->get();
+        $anime = $animeReviews->first();
         $anime->id = $anime->anime_id;
         
+        // ajoute l'overview des notes sur l'anime
         $anime = $this->addOverallRanks($anime);
 
         // si on obtient au moins un résultat
-        if (isset($reviews[0])) {
+        if (isset($animeReviews[0])) {
             // si l'anime dispose d'au moins une review
-            if ($reviews[0]->content !== Null) {
+            if ($animeReviews[0]->content !== Null) {
                 // pour chaque review
-                foreach ($reviews as $key => $review) {
+                foreach ($animeReviews as $key => $review) {
                     // si elle appartient à l'utilisateur connecté
                     if ($review->user_id === Auth::id()) {
                         // sépare la review de l'utilisateur des autres
@@ -79,12 +80,13 @@ class AnimeController extends Controller
                         unset($reviews[$key]);
 
                         // et on retourne la vue avec les reviews des autres utilisateurs, la review de l'utilisateur connecté et les informations sur l'anime
-                        return view('anime', ["reviews" => $reviews, "userReview" => $userReview, "anime" => $anime]);
+                        return view('anime', ["reviews" => $animeReviews, "userReview" => $userReview, "anime" => $anime]);
                     }
                 }
                 
                 // si aucune review n'appartient à l'utilisateur, on renvoie les informations sur l'anime et toutes les reviews
-                return view('anime', ["reviews" => $reviews, "anime" => $anime]);
+                
+                return view('anime', ["reviews" => $animeReviews, "anime" => $anime]);
             }
 
             // si l'anime ne dispose pas de review, on renvoie seulement les informations sur l'anime

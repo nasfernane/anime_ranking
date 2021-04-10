@@ -14,20 +14,9 @@ class StoreWatchlist extends FormRequest
      * @return bool
      */
     public function authorize($animeId)
-    {
-        // autorise si l'utilisateur est connecté et que l'anime n'a pas déjà été ajouté à sa playlist
-        if (Auth::check()) {
-            $animeAlreadyAdded = DB::table('watchlists')->where('user_id', Auth::id())->where('anime_id', $animeId)->exists();
-
-            if (!$animeAlreadyAdded) {
-                return true;
-            } 
-
-            return false;
+    { 
             
-        } 
-            
-        return false;
+        return true;
         
     }
 

@@ -6,14 +6,14 @@
   <article class="anime">
     <header class="anime--header">
       <div>
-        <img alt="" src="/covers/{{ $anime->cover }}" />
+        <img alt="Cover" src="/covers/{{ $anime->cover }}" />
       </div>
       <h1>{{ $anime->title }}</h1>
     </header>
     <p>{{ $anime->description }}</p>
     <div>
       <div class="actions">
-        @if  (!isset($userReview))
+        @if (!isset($userReview))
             <form action="/review/{{ $anime->id }}/store" method="POST">
             @csrf
             <div class="input-group input__group--range">
@@ -37,16 +37,15 @@
             <div class="input-group">
                 <label for="content">Votre critique</label>
                 <input type="text" id="content" name="content" required value="{{ old('content') }}"/>
-                @error('content')
+                {{-- @if (error('content'))
                     <p class="error">{{ $message }}</p>
-                @enderror
+                @endif --}}
             </div>
 
             <button class="cta">Ajouter</button>
 
             </form>
-        @else 
-            
+        @else    
             <p>Votre critique :</p>
             <p>{{$userReview->content}}</p>
             <p>Note: </p>
