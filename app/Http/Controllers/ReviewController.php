@@ -48,7 +48,7 @@ class ReviewController extends Controller
 
         // si l'utilisateur n'est pas connecté, retourne l'erreur
         return back()->withErrors([
-            'reviewconnexion' => 'Vous devez vous connecter pour ajouter une review',
+            'connexionRequired' => 'Vous devez vous connecter pour ajouter une review',
           ]);
     }
 
@@ -62,6 +62,8 @@ class ReviewController extends Controller
         if (!$reviewExists) {
             // création d'une review avec mass assignement et validation des saisies utilisateurs
             Review::make($request->validated())->fill(['anime_id' => $animeId, 'user_id' => Auth::id(), 'user_name' => Auth::user()->username])->save();
+            // message flash dans la session pour avertir l'utilisateur
+            $request->session()->flash('status-success', 'Votre review a été ajoutée');
 
             // maj note moyenne sur l'anime
             AnimeController::updateAvgRank($animeId);
@@ -101,24 +103,26 @@ class ReviewController extends Controller
     
     public function update(UpdateReview $request, $id)
     {
+        $review = Review::findOrFail($id);
+
         // vérification des données entrées en input
         $validated = $request->validated();
 
         // Mise à jour de la review
-        $review = Review::find($id);
-        $review->content = $validated['content'];
-        $review->note = $validated['note'];
+        $review->fill($validated);
         $review->save();
+        $request->session()->flash('status-success', 'Votre review a été mise à jour.');
 
         // maj note moyenne sur l'anime
         AnimeController::updateAvgRank($review->anime_id);
 
         // redirige vers la page de l'anime
-        return redirect("/animes/$review->anime_id");
+        // return redirect("/animes/$review->anime_id");
+        return redirect(route('animes.show', ['id' => $review->anime_id]));
     }
 
     
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         // récupération de la review
         $review = Review::find($id);
@@ -126,6 +130,7 @@ class ReviewController extends Controller
         if ($review->user_id === Auth::id()) {
             // supprime la review et revient sur la page de l'anime 
             $review->delete();
+            $request->session()->flash('status-error', 'Votre review a été supprimée');
             return back();
         }
 

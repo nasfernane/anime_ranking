@@ -36,7 +36,7 @@ Route::prefix('/animes')->name('animes.')->group(function () {
 Route::prefix('/watchlist')->name('watchlist.')->group(function () {
     Route::get('/index', [WatchlistController::class, 'index'])->name('index');
     Route::post('/{id}/store', [WatchlistController::class, 'store'])->name('store');
-    Route::post('/{id}/destroy', [WatchlistController::class, 'destroy'])->name('destroy');
+    Route::delete('/{id}/destroy', [WatchlistController::class, 'destroy'])->name('destroy');
 });
 
 // routes liées aux reviews
@@ -44,7 +44,7 @@ Route::prefix('/review')->name('review.')->group(function () {
     Route::get('/{id}/create', [ReviewController::class, 'create'])->name('create');
     Route::post('/{id}/store', [ReviewController::class, 'store'])->name('store');
     Route::post('/{id}/edit', [ReviewController::class, 'edit'])->name('edit');
-    Route::post('/{id}/delete', [ReviewController::class, 'destroy'])->name('destroy');
+    Route::delete('/{id}/delete', [ReviewController::class, 'destroy'])->name('destroy');
     Route::put('/{id}/update', [ReviewController::class, 'update'])->name('update');
 });
 

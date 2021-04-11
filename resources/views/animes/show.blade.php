@@ -28,6 +28,9 @@
                         
                 <p>{{ $anime->description }}</p>
                 <div class="top-list__anime__content--actions">
+                    @error('connexionRequired')
+                        <p class="error">Vous devez vous connecter pour ajouter une review</p>
+                    @enderror
                     @if (!isset($userReview))
                         <a class="cta" href="{{ route('review.create', ['id' => $anime->id]) }}">Ajouter une review</a>
                     @endif
@@ -40,8 +43,14 @@
         </div>
 
         <section class="reviewsContainer">
+            @if (session('status-success'))
+                <span class="success">{{ session('status-success') }}</span>
+            @elseif (session('status-error'))
+                <span class="error">{{ session('status-error') }}</span>
+            @endif
             @isset($userReview)
                 <div class="userReview">
+                    
                     <div class="userReview__header">
                         <span class="userReview__header--user">Ma review</span>
                         <span>{{ $userReview->note }}/10</span>
@@ -54,6 +63,7 @@
                         </form>
                         <form action="/review/{{ $userReview->id }}/delete" method="POST">
                             @csrf
+                            @method('DELETE')
                             <button class="cta">Supprimer ma review</button>
                         </form>
                     </div>
