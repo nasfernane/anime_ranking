@@ -39,10 +39,10 @@ class ReviewController extends Controller
             // en l'absence de review appartenant à l'utilisateur
             if (!$review) {
                 // affiche la page
-                return view('new_review', ["anime" => $anime]);
+                return view('reviews.create', ["anime" => $anime]);
             } else {
                 // sinon, ajoute sa review pour l'afficher à la place de l'input
-                return view('new_review', ["anime" => $anime, "userReview" => $review]);
+                return view('reviews.create', ["anime" => $anime, "userReview" => $review]);
             }
         }
 
@@ -67,7 +67,7 @@ class ReviewController extends Controller
             AnimeController::updateAvgRank($animeId);
 
             // redirige vers la page de l'anime
-            return redirect("/animes/$animeId");
+            return redirect (route('animes.show', ['id' => $animeId]));
         }
 
         // sinon, on redirige vers l'anime
@@ -91,7 +91,7 @@ class ReviewController extends Controller
         // si la review appartient à l'utilisateur connecté
         if ($review->user_id === Auth::id()) {
             // retourne la vue d'édition avec les informations
-            return view('edit_review', ['userReview' => $review, 'anime' => $anime]);
+            return view('reviews.edit', ['userReview' => $review, 'anime' => $anime]);
         }
 
         // sinon, redirige vers la page d'accueil

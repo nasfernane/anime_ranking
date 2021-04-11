@@ -42,7 +42,7 @@ class AnimeController extends Controller
 
     // affiche tous les animes dans la page principale
     public function index () {
-        return view('welcome', ['animes' => Anime::All()]);
+        return view('animes.index', ['animes' => Anime::All()]);
     }
 
     // affichage des animes selon leur note moyenne
@@ -55,14 +55,14 @@ class AnimeController extends Controller
             $anime = $this->addOverallRanks($anime);
         }
         
-        return view('top', ['animes' => $animes]);
+        return view('animes.top', ['animes' => $animes]);
     }
 
     // affichage d'un anime
     public function show ($id) {
         // récupère l'anime et ridirige si il n'existe pas
         $anime = Anime::find($id);
-        if (!$anime) return redirect ('/');
+        if (!$anime) return redirect (route('animes.index'));
 
         // ajoute l'overview des notes sur l'anime
         $anime = $this->addOverallRanks($anime);
@@ -81,16 +81,16 @@ class AnimeController extends Controller
                     unset($reviews[$key]);
 
                     // et on retourne la vue avec les reviews des autres utilisateurs, la review de l'utilisateur connecté et les informations sur l'anime
-                    return view('anime', ["reviews" => $reviews, "userReview" => $userReview, "anime" => $anime]);
+                    return view('animes.show', ["reviews" => $reviews, "userReview" => $userReview, "anime" => $anime]);
                 }
             }
             
             // si aucune review n'appartient à l'utilisateur, on renvoie les informations sur l'anime et toutes les reviews
-            return view('anime', ["reviews" => $reviews, "anime" => $anime]);
+            return view('animes.show', ["reviews" => $reviews, "anime" => $anime]);
         }
 
         // si l'anime ne dispose pas de review, on renvoie seulement les informations sur l'anime
-        return view('anime', ["anime" => $anime]);
+        return view('animes.show', ["anime" => $anime]);
             
     }
 

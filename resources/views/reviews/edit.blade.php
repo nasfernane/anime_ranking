@@ -18,6 +18,7 @@
                 <div class="top-list__anime__content--actions">
                     <form action="/review/{{ $userReview->id }}/update" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="input-group input__group--range">
                             <label for="note">Votre note</label>
                             <input type="range" id="note" name="note" required min="0" max="10" step="1" list="notelist" value="{{ $userReview->note }}"/>

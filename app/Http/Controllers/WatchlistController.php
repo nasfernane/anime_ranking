@@ -29,7 +29,7 @@ class WatchlistController extends Controller
             }
             
             // retourne la vue
-            return view('watchlist', ['watchlist' => $watchlist]);
+            return view('watchlists.index', ['watchlist' => $watchlist]);
 
         }
 
@@ -56,7 +56,7 @@ class WatchlistController extends Controller
                 $watchlist->fill(['user_id' => Auth::id(), 'anime_id' => $animeId])->save();
 
                 // redirige vers la playlist
-                return redirect ('/watchlist/index');
+                return redirect (route('watchlists.index'));
             }
 
             // sinon, revient en arrière
@@ -89,9 +89,12 @@ class WatchlistController extends Controller
 
     
     public function destroy($id)
-    {
+    {   
+        // si l'utilisateur est connecté
         if (Auth::check()) {
+            // récupère la watchlist
             $watchlist = Watchlist::where('user_id', Auth::id())->where('anime_id', $id)->get()->first();
+            // et la supprime si elle existe et appartient à l'utilisateur connecté
             if ($watchlist->exists()) $watchlist->delete();          
             return back();
         }

@@ -13,15 +13,14 @@ use App\Http\Controllers\WatchlistController;
 |--------------------------------------------------------------------------
 */
 
-// routes basiques
+// index
 Route::get('/', function ()  { 
     return redirect('/animes');
 });
 
-Route::view('/login', 'login');
-Route::view('/signup', 'signup');
-
 // routes liées à l'authentification
+Route::view('/login', 'auth.login');
+Route::view('/signup', 'auth.signup');
 Route::post('/login', [AuthController::class, 'logIn']);
 Route::post('/signup', [AuthController::class, 'signUp']);
 Route::post('/signout', [AuthController::class, 'signOut']);
@@ -32,7 +31,6 @@ Route::prefix('/animes')->name('animes.')->group(function () {
     Route::get('/top', [AnimeController::class, 'displayTop'])->name('top');
     Route::get('/{id}', [AnimeController::class, 'show'])->name('show');
 });
-
 
 // routes liées aux watchlists
 Route::prefix('/watchlist')->name('watchlist.')->group(function () {
@@ -47,7 +45,7 @@ Route::prefix('/review')->name('review.')->group(function () {
     Route::post('/{id}/store', [ReviewController::class, 'store'])->name('store');
     Route::post('/{id}/edit', [ReviewController::class, 'edit'])->name('edit');
     Route::post('/{id}/delete', [ReviewController::class, 'destroy'])->name('destroy');
-    Route::post('/{id}/update', [ReviewController::class, 'update'])->name('update');
+    Route::put('/{id}/update', [ReviewController::class, 'update'])->name('update');
 });
 
 
