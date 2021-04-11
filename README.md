@@ -22,7 +22,7 @@ Les catégories principales ont toutes un préfixe et une base nominale communs,
 -   **_Update_** pour persister cette édition
 -   **_Destroy_** pour supprimer une ressource
 
-#### 2ème section : les Controlleurs
+### 2ème section : les Controlleurs
 
 Les controlleurs contiennent la logique concernant les actions effectuées par l'utilisateur. Ils suivent le même pattern de regroupement que le routeur, chacun regroupant les méthodes relatives à une ressource ou un thème spécifique.
 
@@ -35,7 +35,7 @@ AnimeController par exemple contient toutes les actions en lien avec les donnée
 
 Les controlleurs peuvent opérer directement des requêtes sur la BDD, ou se mettre en relation avec des Modèles pour établir une connexion via Eloquent ou le Query Builder, et envoient ensuite généralement les résultats de ces requêtes à une Vue qui se chargera de les afficher.
 
-#### 3ème section : les Modèles
+### 3ème section : les Modèles
 
 Les modèles contiennent les données et la logique qui leur sont associées. Ils ne sont pas très développés dans ce projet mais ils servent entre autres à définir la structure des tables et la validation des données reçues.
 
@@ -43,7 +43,7 @@ Dans le cas de Laravel, on peut associer ces Modèles à des Factories pour gén
 
 Pour ce projet, en plus des seeders présents dans l'énoncé de base pour peupler les animes, ont été inclus l'utilisation des factories pour créer 10 utilisateurs avec Faker, et des seeders pour ajouter automatiquement des critiques de la part de tous les utilisateurs sur chaque anime, couplé avec un générateur de texte pour obtenir des reviews aléatoires en fonction de la note donnée par l'utilisateur.
 
-#### 4ème section : les Vues
+### 4ème section : les Vues
 
 Les vues constituent la partie visible d'une interface graphique. Elles se servent du modèle ou des données renvoyées par les conrolleurs pour les intégrer et les afficher dans des templates HTML.
 
@@ -55,13 +55,13 @@ J'ai utilisé Sass comme framework css, sur la base adaptée d'un pattern 7-1 et
 
 En dehors de l'architecture MVC et des outils déjà cités plus haut, j'ai pu aussi découvrir pendant cette évalusation :
 
-#### Les migrations
+### Les migrations
 
 Constituées de deux fonctions natives pour la création ou leur déplétion, elles permettent de créer facilement des tables et des colonnes dans la BDD, en incluant les types de données et les relations entre les tables.
 
 Elles permettent de partager facilement le setup d'une bdd entre plusieurs devs et de "reboot" sur une simple commande toute la BDD sur une base saine.
 
-#### Les tests phpunit
+### Les tests phpunit
 
 Je n'ai pas encore pris le temps d'explorer ça en profondeur, mais j'ai découvert et ajouté quelques tests phpunit pour opérer des tests unitaires ou de features sur les requêtes au site ou à la bdd.
 
