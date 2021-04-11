@@ -7,11 +7,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WatchlistController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
+// ==========================================================================
 
 // index
 Route::get('/', [AnimeController::class, 'index'])->name('index');
@@ -45,16 +41,3 @@ Route::prefix('/review')->name('review.')->middleware('auth')->group(function ()
     Route::delete('/{id}/delete', [ReviewController::class, 'destroy'])->name('destroy');
     Route::put('/{id}/update', [ReviewController::class, 'update'])->name('update');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
