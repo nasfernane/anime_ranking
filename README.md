@@ -14,8 +14,8 @@ Les requêtes sont en premier lieu analysées par le routeur de Laravel. En fonc
 
 Les catégories principales ont toutes un préfixe et une base nominale communs, et suivent la convention Laravel pour les actions CRUD concernant les ressources :
 
--   **Index** pour afficher l'ensemble de la ressource
--   **Show** pour affiche une ressource particulière sur son ID
+-   _Index_ pour afficher l'ensemble de la ressource
+-   _Show_ pour affiche une ressource particulière sur son ID
 -   **Create** pour afficher le formulaire qui sert à ajouter une nouvelle ressource
 -   **Store** pour la persister dans la base de données
 -   **Edit** pour afficher le formulaire d'édition
