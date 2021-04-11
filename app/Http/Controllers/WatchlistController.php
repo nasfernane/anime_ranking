@@ -11,7 +11,6 @@ use App\Http\Requests\StoreWatchlist;
 use App\Http\Controllers\AnimeController;
 
 use App\Models\Watchlist;
-use Illuminate\Database\DBAL\TimestampType;
 
 class WatchlistController extends Controller
 {
@@ -44,7 +43,7 @@ class WatchlistController extends Controller
     }
 
     
-    public function store(Request $request, $animeId)
+    public function store($animeId)
     {
         // si l'utilisateur est connecté
         if (Auth::check()) {

@@ -125,7 +125,7 @@ class ReviewController extends Controller
     public function destroy(Request $request, $id)
     {
         // récupération de la review
-        $review = Review::find($id);
+        $review = Review::findOrFail($id);
         // si la review appartient à l'utilisateur connecté
         if ($review->user_id === Auth::id()) {
             // supprime la review et revient sur la page de l'anime 

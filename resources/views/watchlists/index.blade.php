@@ -36,7 +36,6 @@
                 <p>{{ $anime->description }}</p>
                 <div class="top-list__anime__content--actions">
                     <a class="cta" href="/animes/{{ $anime->id }}">Reviews</a>
-                    {{-- <form action="/watchlist/{{ $anime->id }}/destroy" method="POST"> --}}
                     <form action="{{ route('watchlist.destroy', ['id' => $anime->id])}}" method="POST">
                     @csrf
                     @method('DELETE')
