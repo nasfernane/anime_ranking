@@ -14,9 +14,7 @@ use App\Http\Controllers\WatchlistController;
 */
 
 // index
-Route::get('/', function ()  { 
-    return redirect('/animes');
-});
+Route::get('/', [AnimeController::class, 'index'])->name('index');
 
 // routes liées à l'authentification
 Route::view('/login', 'auth.login');
