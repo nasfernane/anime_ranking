@@ -1,4 +1,6 @@
-## Deuxième évaluation en cours de formation de Nassim Fernane : Projet Anime Ranking du 5 avril 2021.
+## Deuxième évaluation en cours de formation de Nassim Fernane
+
+## Projet Anime Ranking du 5 avril 2021
 
 ## **CONTEXTE EVALUATION**
 
