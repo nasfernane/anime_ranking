@@ -29,7 +29,7 @@ class WatchlistController extends Controller
             }
             
             // retourne la vue
-            return view('watchlists.index', ['watchlist' => $watchlist]);
+            return view('watchlist.index', ['watchlist' => $watchlist]);
 
         }
 

@@ -18,7 +18,6 @@ class AnimeController extends Controller
         foreach ($animeIds as $id) {
             // mise à jour de la note moyenne d'un anime
             $avg_rank = DB::table('reviews')->where('anime_id', '=', $id)->get()->avg('note');
-            // dd($avg_rank);
             DB::table('animes')->where('id', $id)->update(['avgRank' => $avg_rank]);
         }
     }
@@ -35,7 +34,6 @@ class AnimeController extends Controller
             // ajoute le tableau à l'anime
             $anime->overallRanks = $overallRanks;
         
-
         // retourne la collection
         return $anime;
     }

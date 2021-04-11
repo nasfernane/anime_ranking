@@ -7,17 +7,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+
 use App\Models\User;
 
 use App\Http\Requests\StoreUser;
+use App\Http\Requests\LoginUser;
 
 class AuthController extends Controller
 {
-    public function logIn (Request $request) {
-        $validated = $request->validate([
-            "username" => "required",
-            "password" => "required",
-          ]);
+
+    public function logIn (LoginUser $request) {
+        // vérifie la validité des infos utilisateurs (voit class LoginUser dans Requests)
+        $validated = $request->validated();
 
           if (Auth::attempt($validated)) {
             return redirect()->intended('/');
