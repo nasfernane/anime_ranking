@@ -1,6 +1,4 @@
-## Deuxième évaluation en cours de formation de Nassim Fernane
-
-Projet Anime Ranking du 5 avril 2021
+## Deuxième évaluation en cours de formation de Nassim Fernane 05/04/2021
 
 ## **CONTEXTE EVALUATION**
 
@@ -10,7 +8,7 @@ Projet Anime Ranking du 5 avril 2021
 
 Le code est organisé en architecture MVC.
 
-### **1ère phase : les Routes**
+### **-1ère phase : les Routes**
 
 Les requêtes sont en premier lieu analysées par le routeur de Laravel. En fonction de l'url rencontrée et du "verbe" utilisé (GET, POST, DELETE, UPDATE, PUT ou PATCH), le routeur redirige vers une autre page ou vers une "action", le plus souvent liée à une méthode attachée à un Controller. Ici les routes ont été organisées par catégories, les routes liées à l'authentification, aux animes, aux watchlists et aux reviews.
 
