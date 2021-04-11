@@ -29,7 +29,7 @@ class WatchlistController extends Controller
             }
             
             // retourne la vue
-            return view('watchlist.index', ['watchlist' => $watchlist]);
+            return view('watchlists.index', ['watchlist' => $watchlist]);
 
         }
 
@@ -56,7 +56,7 @@ class WatchlistController extends Controller
                 $watchlist->fill(['user_id' => Auth::id(), 'anime_id' => $animeId])->save();
 
                 // redirige vers la playlist
-                return redirect (route('watchlists.index'));
+                return redirect (route('watchlist.index'));
             }
 
             // sinon, revient en arrière
