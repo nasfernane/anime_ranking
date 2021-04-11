@@ -73,17 +73,10 @@ class ReviewController extends Controller
         }
 
         // sinon, on redirige vers l'anime
-        return redirect (route('anime.show', ['id' => $animeId]));
+        return redirect (route('animes.show', ['id' => $animeId]));
         
     }
-
-    
-    public function show($id)
-    {
-        //
-    }
-
-    
+ 
     public function edit($id)
     {
         // récupération de la review et de l'anime correspondant
