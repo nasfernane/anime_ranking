@@ -7,10 +7,14 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WatchlistController;
 
+use Illuminate\Support\Facades\Auth;
+
 // ==========================================================================
 
+Auth::routes(['verify' => true]);
+
 // index
-Route::get('/', [AnimeController::class, 'index'])->name('index');
+Route::get('/', [AnimeController::class, 'index'])->name('index')->middleware('verified');
 
 // routes liées à l'authentification
 Route::view('/login', 'auth.login')->name('login');
@@ -41,3 +45,7 @@ Route::prefix('/review')->name('review.')->middleware('auth')->group(function ()
     Route::delete('/{id}/delete', [ReviewController::class, 'destroy'])->name('destroy');
     Route::put('/{id}/update', [ReviewController::class, 'update'])->name('update');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
