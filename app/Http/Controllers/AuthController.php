@@ -39,7 +39,7 @@ class AuthController extends Controller
 
           Auth::login($user);
         
-          return redirect('animes.index');
+          return redirect(route('animes.index'));
     }
 
     public function signOut (Request $request) {

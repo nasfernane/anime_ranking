@@ -1,82 +1,25 @@
 \_Deuxième évaluation en cours de formation de Nassim Fernane : Projet Anime Ranking du 5 avril 2021.
 
+## **CONTEXTE EVALUATION**
+
+"Vous travaillez pour une entreprise qui édite un site internet qui tente de faire concurrence à AlloCiné et SensCritique dans le domaine des animes. Le but du projet est d’avoir des critiques de bonne qualité, et de pouvoir permettre aux visiteurs du site de découvrir de nouveaux animes."
+
+## **ORGANISATION DU CODE**
+
+Le code est organisé en architecture MVC.
+
+#### 1ère phase : les Routes
+
+Les requêtes sont en premier lieu analysées par le routeur de Laravel. En fonction de l'url rencontrée et du "verbe" utilisé (GET, POST, DELETE, UPDATE, PUT ou PATCH), le routeur redirige vers une autre page ou vers une "action", le plus souvent liée à une méthode attachée à un Controller. Ici les routes ont été organisées par catégories, les routes liées à l'authentification, aux animes, aux watchlists et aux reviews.
+
+Les catégories principales ont toutes un préfixe et et une base de nom commun, et suivent la convention Laravel pour les actions CRUD concernant les ressources : Index pour afficher l'ensemble de la ressource, show pour affiche une ressource particulière sur son ID, create pour afficher le formulaire qui sert à ajouter une nouvelle ressource, store pour la persister dans la base de données, edit pour afficher le formulaire d'édition, update pour persister cette édition, et enfin destroy pour supprimer une ressource.
+
+#### 1ère phase : les Controlleurs
+
+Les controlleurs contiennent la logique concernant les actions effectuées par l'utilisateur.
+
 ## **FONCTIONNEMENT ET DESCRIPTION DU SITE**
 
 ### Page 1
 
 ### Page 2
-
-## **ORGANISATION DU CODE**
-
-**Lien de la maquette Figma** : https://www.figma.com/file/CciOnwXV0xB0fck6iezUpu/My-Music-App?node-id=0%3A1
-
-## **JOURNAL DE BORD**
-
-### Jour 1
-
-1. _Analyse des documents et demandes clients_
-
--   Définition de ce qui est indispensable et des aspects sur lequels on peut proposer des modifications
--   Réflexion et définition des fonctionnalités du site et de son interface
--   Préparation des ressources : choix des articles, images et biographies
--   Elaboration des codes couleurs et choix des polices de caractères
-
-2. _Elaboration de la structure générale du site et outils_
-
--   Création des fichiers HTML et principales sections de développement
--   Mise en place de SASS et fichiers de style modulaires
--   Installation des dépendances
-
-3. _Maquettage du site première partie_
-
--   Choix et retouches du logo, déclinaison des couleurs
--   Début du maquettage, page 1 et versions tablette/mobile
--   Modernisation du design
-
-### Jour 2
-
-1.  _Maquettage du site deuxième partie_
-
--   Fin de la page 2 et déclinaisons responsive
-
-2.  _Début du code_
-
--   Stockage des couleurs en variables CSS
--   Séparation des différentes sections en layouts
--   Approfondissement de la structure du site, mise en place des contenus
-
-3.  _Mise en forme_
-
--   Conception visuelle des principales sections de la page d'accueil
-
-4.  _Script_
-
--   Implémentation de la partie JavaScript pour la section de recherche d'un nouvel artiste, avec preview sonore des trois derniers titres
-
-### Jour 3
-
-1.  _Mise en forme, seconde partie_
-
--   Conception visuelle de la page des artistes favoris
--   Mises à jour mineures sur le design de la première page
-
-2.  _Script_
-
--   Ecriture d'un fichier JSON pour stocker les informations des artistes mis en favoris
--   Elaboration d'un script pour changer l'encadré des favoris dynamiquement
--   Elaboration d'un script pour revenir à la page d'accueil
-
-## Jour 4
-
-1.  _Mise en forme, troisième partie_
-
--   Finalisation du responsive
--   Correctifs mineurs
-
-2.  _Code_
-
--   Vérification de la structure et commentaires
-
-3.  _Organisation_
-
--   Mise à jour du Readme
