@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
-use App\Mail\VerifyEmail;
+
 use App\Models\User;
 
 use App\Http\Requests\StoreUser;
@@ -34,11 +34,11 @@ class AuthController extends Controller
 
           $user = new User();
           $user->username = $validated["username"];
-          $user->email = $validated["email"];
           $user->password = Hash::make($validated["password"]);
           $user->save();
 
-          Auth::login($user);        
+          Auth::login($user);
+        
           return redirect(route('animes.index'));
     }
 

@@ -17,14 +17,6 @@
         </div>
 
         <div class="input-group">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required />
-          @error('email')
-            <p class="error">{{ $message }}</p>
-          @enderror
-        </div>
-
-        <div class="input-group">
           <label for="password">Mot de passe</label>
           <input id="password" name="password" type="password" required />
           @error('password')

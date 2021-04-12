@@ -26,8 +26,7 @@ class StoreUser extends FormRequest
         return [
             "username" => "bail|required|string|min:2",
             "password" => "bail|required|string|min:5",
-            "password_confirmation" => "required|same:password",
-            "email" => "required|email"
+            "password_confirmation" => "required|same:password"
           ];
     }
 }
