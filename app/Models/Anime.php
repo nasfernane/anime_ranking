@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Support\Facades\DB;
 
 class Anime extends Model
 {
@@ -13,5 +12,4 @@ class Anime extends Model
 
     protected $table = 'animes';
 
-    
 }
