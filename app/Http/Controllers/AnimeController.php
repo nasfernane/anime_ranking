@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Expr\Cast\Object_;
-use SebastianBergmann\Type\NullType;
+
 
 use App\Models\Anime;
 use App\Models\Review;

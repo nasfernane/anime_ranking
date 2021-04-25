@@ -1,5 +1,4 @@
 <x-layout>
-    
   <ul role="list" class="top-list">
     <h1>Classement des utilisateurs</h1>
     @foreach($animes as $anime)
@@ -23,8 +22,7 @@
                     <h2> #{{ $loop->index + 1 }} {{ $anime->title }}</h2> 
                     @include ('components.avg_rank')
                 </div>
-                
-                
+                               
                 <p>{{ $anime->description }}</p>
                 <div class="top-list__anime__content--actions">
                     <a class="cta" href="/animes/{{ $anime->id }}">Reviews</a>
@@ -33,11 +31,7 @@
                         <button class="cta">Ajouter à ma watchlist</button>
                     </form>
                 </div>       
-            </div>
-            
-            
-        
-            
+            </div>          
         </li>
     @endforeach
   </ul>
