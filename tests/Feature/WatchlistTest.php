@@ -16,8 +16,10 @@ class WatchlistTest extends TestCase
 
     public function test_seeRedirectIfUserNotLogged() 
     {
+        // texte l'accès à l'index de la watchlist
         $response = $this->get('/watchlist/index');
 
+        // vérifie si l'utilisateur obtient une réponse 302 (redirection)
         $response->assertStatus(302);
     }
 

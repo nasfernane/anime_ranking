@@ -15,16 +15,7 @@ use Database\Seeders\Spintax;
 
 
 class ReviewSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     * 
-     * 
-     */
-
-     
+{ 
     public function run()
     {
         // récupère les utilisateurs et animes déjà créés

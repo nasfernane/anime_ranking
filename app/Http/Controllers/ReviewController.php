@@ -96,6 +96,7 @@ class ReviewController extends Controller
     
     public function update(UpdateReview $request, $id)
     {
+        // requête Eloquent pour chercher une critique par son identifiant, renvoie erreur 404 en cas d'échec
         $review = Review::findOrFail($id);
 
         // vérification des données entrées en input
@@ -110,7 +111,6 @@ class ReviewController extends Controller
         AnimeController::updateAvgRank($review->anime_id);
 
         // redirige vers la page de l'anime
-        // return redirect("/animes/$review->anime_id");
         return redirect(route('animes.show', ['id' => $review->anime_id]));
     }
 
